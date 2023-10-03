@@ -13,7 +13,8 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        //
+        $all = Classe::all();
+        return $all;
     }
 
     /**

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Niveau extends Model
 {
     use HasFactory;
+    protected $table = 'niveaux';
+    public function classes()
+    {
+        return $this->hasMany(Classe::class);
+    }
 }

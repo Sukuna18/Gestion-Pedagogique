@@ -1,0 +1,19 @@
+<div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10 max-w-screen-lg">
+    <table class="w-full table-fixed">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Classes</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Professeurs</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Semestres</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Annees</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Modules</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">heures</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            <tr app-items *ngFor="let item of data" [cours]="item">
+            </tr>
+        </tbody>
+    </table>
+</div>

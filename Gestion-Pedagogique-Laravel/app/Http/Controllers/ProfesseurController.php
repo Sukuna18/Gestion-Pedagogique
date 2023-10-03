@@ -13,7 +13,8 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        //
+        $all = Professeur::all();
+        return $all;
     }
 
     /**

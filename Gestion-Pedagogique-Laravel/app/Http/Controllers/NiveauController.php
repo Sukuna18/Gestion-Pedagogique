@@ -13,7 +13,8 @@ class NiveauController extends Controller
      */
     public function index()
     {
-        //
+        $all = Niveau::all();
+        return $all;
     }
 
     /**

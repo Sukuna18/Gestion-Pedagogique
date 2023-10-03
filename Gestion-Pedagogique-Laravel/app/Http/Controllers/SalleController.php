@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreNiveauClasseRequest;
-use App\Http\Requests\UpdateNiveauClasseRequest;
-use App\Models\NiveauClasse;
+use App\Http\Requests\StoreSalleRequest;
+use App\Http\Requests\UpdateSalleRequest;
+use App\Models\Salle;
 
-class NiveauClasseController extends Controller
+class SalleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $all = Salle::all();
+        return $all;
     }
 
     /**
@@ -27,7 +28,7 @@ class NiveauClasseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreNiveauClasseRequest $request)
+    public function store(StoreSalleRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class NiveauClasseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(NiveauClasse $niveauClasse)
+    public function show(Salle $salle)
     {
         //
     }
@@ -43,7 +44,7 @@ class NiveauClasseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(NiveauClasse $niveauClasse)
+    public function edit(Salle $salle)
     {
         //
     }
@@ -51,7 +52,7 @@ class NiveauClasseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNiveauClasseRequest $request, NiveauClasse $niveauClasse)
+    public function update(UpdateSalleRequest $request, Salle $salle)
     {
         //
     }
@@ -59,7 +60,7 @@ class NiveauClasseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NiveauClasse $niveauClasse)
+    public function destroy(Salle $salle)
     {
         //
     }
