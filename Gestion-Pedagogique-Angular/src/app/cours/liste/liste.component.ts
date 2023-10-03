@@ -10,6 +10,5 @@ export class ListeComponent implements OnInit {
 @Input() data: Cours[]|undefined;
 ngOnInit(): void {
   console.log(this.data);
-  
 }
 }

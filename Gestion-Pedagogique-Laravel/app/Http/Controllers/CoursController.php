@@ -70,7 +70,14 @@ class CoursController extends Controller
      */
     public function update(UpdateCoursRequest $request, Cours $cours)
     {
-        //
+        $cours->update([
+            'heure_globale' => $request->heure_globale,
+            'module_id' => $request->module_id,
+            'classe_id' => $request->classe_id,
+            'professeur_id' => $request->professeur_id,
+            'semestre_id' => $request->semestre_id,
+        ]);
+        return new CoursRessource($cours);
     }
 
     /**
@@ -78,7 +85,10 @@ class CoursController extends Controller
      */
     public function destroy(Cours $cours)
     {
-        //
+        $cours->delete();
+        return response()->json([
+            'message' => 'Cours supprimé avec succès'
+        ]);
     }
     public function allData(){
         $allClasses = Classe::all();

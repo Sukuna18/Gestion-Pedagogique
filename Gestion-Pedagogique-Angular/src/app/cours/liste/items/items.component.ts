@@ -15,7 +15,7 @@ export class ItemsComponent implements OnInit {
   deleteItems(id:number|undefined){
     this.CommunicationService.SendDeletedCours(id);
   }
-  editItems(id:number|undefined){
-    
+  editItems(){
+    this.CommunicationService.SendUpdatedCours(this.cours as Cours);
   }
 }

@@ -26,5 +26,18 @@ ngOnInit(): void {
     });
   }
   );
+  this.communicationService.deletedCoursId.subscribe((id:number|undefined) => {
+    this.coursService.delete(id as number).subscribe(() => {
+      this.data?.cours.splice(this.data?.cours.findIndex((cours:Cours) => cours.id === id), 1);
+    }
+    );
+  });
+  this.communicationService.modifiedCours.subscribe((data:Cours) => {
+    this.coursService.update(data).subscribe((cours:any) => {
+      if(this.data){
+        this.data.cours[this.data.cours.findIndex((cours:Cours) => cours.id === data.id)] = cours.data as Cours;
+      }
+    });
+  });
 }
 }

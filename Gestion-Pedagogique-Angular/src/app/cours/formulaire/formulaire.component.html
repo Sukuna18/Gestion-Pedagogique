@@ -45,12 +45,12 @@
 
                 <div class="md:col-span-1">
                   <label for="heure">Heure Globale</label>
-                  <input type="text" formControlName="heure_globale" name="heure" id="heure" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder=""/>
+                  <input (input)="handleGlobalHour()" type="number" formControlName="heure_globale" name="heure" id="heure" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder=""/>
                 </div>
         
                 <div class="md:col-span-5 text-right">
                   <div class="inline-flex items-end">
-                    <button (click)="addCours()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter un cours</button>
+                    <button (click)="!isEdit ? addCours(): editerCours()" [disabled]="useForm.value.heure_globale == 0" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ isEdit ? "Editer un cours" : "Ajouter un cours" }}</button>
                   </div>
                 </div>
               </div>

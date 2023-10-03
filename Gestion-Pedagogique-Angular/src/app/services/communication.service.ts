@@ -8,10 +8,19 @@ import { Cours } from '../interfaces/cours';
 export class CommunicationService {
   public cours = new Subject<Cours>();
   public deletedCoursId = new Subject<number|undefined>();
+  public updatedCours = new Subject<Cours>();
+  public modifiedCours = new Subject<Cours>();
   SendDeletedCours(id:number|undefined){
     this.deletedCoursId.next(id);
   }
   SendCours(data: Cours){
     this.cours.next(data);
   }
+  SendUpdatedCours(data: Cours){
+    this.updatedCours.next(data);
+  }
+  SendModifiedCours(data: Cours){
+    this.modifiedCours.next(data);
+  }
+  
 }

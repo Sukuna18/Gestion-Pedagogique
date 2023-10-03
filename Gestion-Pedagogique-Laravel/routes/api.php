@@ -20,5 +20,5 @@ Route::apiResource("semestres", "App\Http\Controllers\SemestreController");
 Route::apiResource("classes", "App\Http\Controllers\ClasseController");
 Route::apiResource("professeurs", "App\Http\Controllers\ProfesseurController");
 Route::apiResource("annees", "App\Http\Controllers\AnneeScolaireController");
-Route::apiResource("cours", "App\Http\Controllers\CoursController");
+Route::apiResource("cours", "App\Http\Controllers\CoursController")->parameter("cours", "cours");
 Route::get("all", "App\Http\Controllers\CoursController@allData");
