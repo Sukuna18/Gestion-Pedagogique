@@ -14,11 +14,13 @@ import { CoursService } from '../services/cours.service';
   styleUrls: ['./cours.component.css']
 })
 export class CoursComponent implements OnInit{
-  data: { cours: Cours[], classes: Classe[], modules:Module[], professeurs: Professeur[], annees: Annee[]}|undefined; 
+  totalPage : number = 1;
+  data: { cours: Cours[], classes: Classe[], modules:Module[], professeurs: Professeur[], annees: Annee[]} = {cours: [], classes: [], modules:[], professeurs:[], annees:[]}; 
   constructor(private activatedRoute: ActivatedRoute, private communicationService: CommunicationService, private coursService:CoursService) { }
 ngOnInit(): void {
   this.activatedRoute.data.subscribe(({cours}) =>{
     this.data = cours;
+    this.totalPage = cours.total;
   });
   this.communicationService.cours.subscribe((data:Cours) =>{ 
     this.coursService.add(data).subscribe((cours:any) => {

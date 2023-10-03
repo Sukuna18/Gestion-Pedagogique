@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('professeur_id')->constrained('professeurs')->cascadeOnDelete();
             $table->foreignId('semestre_id')->constrained('semestres')->cascadeOnDelete();
             $table->foreignId('annee_id')->constrained('annee_scolaires')->cascadeOnDelete();
+            $table->boolean('termine')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

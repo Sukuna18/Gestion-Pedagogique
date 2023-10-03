@@ -12,8 +12,16 @@
             </tr>
         </thead>
         <tbody class="bg-white">
-            <tr app-items *ngFor="let item of data" [cours]="item">
+            <tr app-items *ngFor="let item of paginatedArticles" [cours]="item">
             </tr>
         </tbody>
     </table>
 </div>
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="setCurrentPage($event)"
+></app-pagination>
+
+  
+

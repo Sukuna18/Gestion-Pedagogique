@@ -6,6 +6,7 @@ import { coursResolver } from './resolver/cours.resolver';
 const routes: Routes = [
   {path: '', redirectTo: 'cours', pathMatch: 'full'},
   {path: 'cours', loadChildren: () => import('./cours/cours.module').then(m => m.CoursModule), resolve: {cours: coursResolver}},
+  {path: 'sessions', loadChildren: () => import('./session-cours/session-cours.module').then(m => m.SessionCoursModule)},
   {path: '**', component: PageNotFoundComponent}
 ];
 

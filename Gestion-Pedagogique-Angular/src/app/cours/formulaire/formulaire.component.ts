@@ -20,6 +20,8 @@ export class FormulaireComponent implements OnInit{
     heure_globale: [0],
   });
 ngOnInit(): void {
+  console.log(this.data);
+  
   this.communicationService.updatedCours.subscribe((data:Cours) => {
     console.log(data);
     this.upatedId = data.id;
