@@ -2,16 +2,34 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { coursResolver } from './resolver/cours.resolver';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'cours', pathMatch: 'full'},
-  {path: 'cours', loadChildren: () => import('./cours/cours.module').then(m => m.CoursModule), resolve: {cours: coursResolver}},
-  {path: 'sessions', loadChildren: () => import('./session-cours/session-cours.module').then(m => m.SessionCoursModule)},
-  {path: '**', component: PageNotFoundComponent}
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'cours',
+    loadChildren: () =>
+      import('./cours/cours.module').then((m) => m.CoursModule),
+    resolve: { cours: coursResolver },
+    canActivate: [AuthGuardService],
+    data: { roles: ['responsable'] },
+  },
+  {
+    path: 'sessions',
+    loadChildren: () =>
+      import('./session-cours/session-cours.module').then(
+        (m) => m.SessionCoursModule
+      ),
+    canActivate: [AuthGuardService],
+    data: { roles: ['attache'] },
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

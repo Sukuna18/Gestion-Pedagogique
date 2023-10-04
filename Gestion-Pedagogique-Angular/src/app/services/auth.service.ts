@@ -8,11 +8,12 @@ import Swal from 'sweetalert2';
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  login(login: string, password: string) {
-    return this.http.post('http://127.0.0.1:8000/api/login', { login, password }).pipe(
+  login(email: string, password: string) {
+    return this.http.post('http://127.0.0.1:8000/api/login', { email, password }).pipe(
       tap((response: any) => {
         localStorage.setItem('token', response.token);
-        console.log(response); 
+        console.log(response.user.role);
+        localStorage.setItem('role', JSON.stringify(response.user.role)); 
       }
       ),
       catchError((error) => { 
@@ -28,7 +29,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post('http://127.0.0.1:8000/api/users/logout', {}).pipe(
+    return this.http.post('http://127.0.0.1:8000/api/logout', {}).pipe(
       tap((response)=>{
         console.log(response);
         
@@ -45,5 +46,12 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+  getUserRole(): string[] | null {
+    let roles = localStorage.getItem('role');
+    if(!roles)    return null;
+    console.log(roles);
+    
+    return JSON.parse(roles);
   }
 }

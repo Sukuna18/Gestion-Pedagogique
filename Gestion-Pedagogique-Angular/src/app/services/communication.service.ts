@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Cours } from '../interfaces/cours';
 
 @Injectable({
@@ -10,6 +10,8 @@ export class CommunicationService {
   public deletedCoursId = new Subject<number|undefined>();
   public updatedCours = new Subject<Cours>();
   public modifiedCours = new Subject<Cours>();
+  public role = new BehaviorSubject<any>(null);
+
   SendDeletedCours(id:number|undefined){
     this.deletedCoursId.next(id);
   }
@@ -21,6 +23,9 @@ export class CommunicationService {
   }
   SendModifiedCours(data: Cours){
     this.modifiedCours.next(data);
+  }
+  SendRole(data: any){
+    this.role.next(data);
   }
   
 }
