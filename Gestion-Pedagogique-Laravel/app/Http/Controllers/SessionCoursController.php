@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSessionCoursRequest;
 use App\Http\Requests\UpdateSessionCoursRequest;
 use App\Http\Resources\SessionCoursRessource;
 use App\Models\SessionCours;
+use Carbon\Carbon;
 
 class SessionCoursController extends Controller
 {
@@ -31,7 +32,7 @@ class SessionCoursController extends Controller
     public function store(StoreSessionCoursRequest $request)
     {
         $data = SessionCours::create([
-            'date' => $request->date,
+            'date' => Carbon::parse($request->date)->format('Y-m-d'),
             'heure_debut' => $request->heure_debut,
             'heure_fin' => $request->heure_fin,
             'nb_heures' => $request->nb_heures,

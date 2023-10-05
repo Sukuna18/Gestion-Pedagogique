@@ -102,9 +102,11 @@ class CoursController extends Controller
         $AllModules = Module::all();
         $AllSemestres = Semestre::all();
         $annees = AnneeScolaire::where('active', 1)->first();
+        $salle = Salle::all();
         return response()->json([
             'classes' => $allClasses,
             'professeurs' => $AllProfesseurs,
+            'salles' => $salle,
             'modules' => $AllModules,
             'semestres' => $AllSemestres,
             'annees' => $annees,

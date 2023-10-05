@@ -36,4 +36,22 @@ export class AppComponent implements OnInit{
     if(this.router.url === '/login' || this.router.url === '/inscription') return false;
     return true;
   }
+  isResponsable():boolean{
+    let roles = localStorage.getItem('role');
+    if(roles){
+      if(JSON.parse(roles).includes('responsable')){
+        return true;
+      }
+    }
+    return false;
+  }
+  isAttache(){
+    let roles = localStorage.getItem('role');
+    if(roles){
+      if(JSON.parse(roles).includes('attache')){
+        return true;
+      }
+    }
+    return false;
+  }
 }

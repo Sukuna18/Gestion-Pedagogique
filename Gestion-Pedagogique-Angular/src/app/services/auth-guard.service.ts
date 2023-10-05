@@ -24,7 +24,7 @@ export class AuthGuardService {
     if(userRoles && roles){
       const match = userRoles.some(r=> roles.includes(r));
       if(!match){
-        this.router.navigate(['**']);
+        this.router.navigate(['home']);
         return false;
       }
     }

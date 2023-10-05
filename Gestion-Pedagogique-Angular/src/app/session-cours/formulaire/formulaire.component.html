@@ -1,0 +1,225 @@
+<!-- component -->
+<div class="flex">
+  <div class="p-6 bg-gray-100 flex items-center justify-center">
+    <div class="container max-w-screen-lg mx-auto">
+      <div>
+        <h1 class="font-semibold text-2xl text-gray-600">
+          Plannification Session de Cours
+        </h1>
+        <p class="text-gray-500 mb-6">{{data.annees.libelle}}</p>
+
+        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 relative">
+          <!-- Open the modal using ID.showModal() method -->
+          <div (click)="ajouterClasse()">
+            <button
+              [disabled]="selectedCours.length == 0"
+              onclick="my_modal_1.showModal()"
+              class="absolute top-5 right-5 btn btn-success text-white"
+            >
+              Ajouter Classe
+            </button>
+          </div>
+          <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+              <h3 class="font-bold text-lg">Classe avec meme module</h3>
+              <ng-container *ngFor="let item of coursClasses">
+                <div
+                  class="overflow-scroll p-4 border rounded-lg shadow-md bg-blue-950 text-white relative"
+                >
+                  <strong>Module:</strong> {{ item.module.libelle }}<br />
+                  <strong>Classe:</strong> {{ item.classe.libelle }} ({{
+                    item.classe.filiere
+                  }})<br />
+                  <strong>Semestre:</strong> {{ item.semestre.libelle }}<br />
+                  <strong>Professeur:</strong> {{ item.professeur.prenom }}
+                  {{ item.professeur.nom }}<br />
+                  <button
+            (click)="selectCours(item.id)"
+            class="bg-green-500 rounded p-1"
+          >
+            Sélectionner
+          </button>
+                </div>
+              </ng-container>
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn btn-primary">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
+          <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+            <div class="text-gray-600">
+              <p class="font-medium text-lg">Sonatel School</p>
+              <img
+                src="https://img.freepik.com/free-vector/gradient-high-school-logo-design_23-2149626932.jpg"
+                class="h-20 w-20 mr-3"
+                alt="Flowbite Logo"
+              />
+            </div>
+            <form action="" [formGroup]="useForm">
+              <div class="lg:col-span-2">
+                <div
+                  class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5"
+                >
+                  <div class="md:col-span-2">
+                    <label for="full_name">Date</label>
+                    <input
+                      type="date"
+                      formControlName="date"
+                      name="date"
+                      id="full_name"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    />
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label for="full_name">Heure Debut</label>
+                    <input
+                      type="text"
+                      formControlName="heure_debut"
+                      placeholder="hh:mm"
+                      name="heure_debut"
+                      id="full_name"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    />
+                    <small class="text-red-600" 
+                    *ngIf="(useForm.get('heure_debut')?.invalid) && (useForm.get('heure_debut')?.dirty || useForm.get('heure_debut')?.touched) "
+                    >
+                      heure de debut invalide
+                    </small>
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label for="full_name">Heure Fin</label>
+                    <input
+                      type="text"
+                      formControlName="heure_fin"
+                      placeholder="hh:mm"
+                      name="heure_fin"
+                      id="full_name"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    />
+                    <small class="text-red-600" 
+                    *ngIf="(useForm.get('heure_fin')?.invalid) && (useForm.get('heure_fin')?.dirty || useForm.get('heure_fin')?.touched)"
+                    >
+                      heure de fin invalide
+                    </small>
+                  </div>
+
+                  <div class="md:col-span-2">
+                    <label for="full_name">Salles</label>
+                    <select
+                      formControlName="salle_id"
+                      name="salle"
+                      id="salle"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    >
+                      <option *ngFor="let item of data.salles">
+                        {{ item.libelle }} : effectif ({{ item.capacite }})
+                      </option>
+                    </select>
+                  </div>
+                  <div class="">
+                    <label for="full_name">Format Cours</label>
+                    <select
+                      formControlName="en_ligne"
+                      name="salle"
+                      id="salle"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    >
+                      <option [value]=1>En ligne</option>
+                      <option [value]=0>En presentiel</option>
+                    </select>
+                  </div>
+
+                  <div class="md:col-span-4">
+                    <label for="full_name">Cours Choisi</label>
+                    <div
+                      class="grid grid-cols-2 gap-4 mt-7"
+                    >
+                      <ng-container *ngFor="let item of selectedCours">
+                        <div
+                          class="p-4 border rounded-lg shadow-md bg-blue-950 text-white relative"
+                        >
+                          <span
+                            (click)="cancelSelect(item.id)"
+                            class="absolute top-4 right-4 cursor-pointer"
+                            >❌</span
+                          >
+                          <strong>Module:</strong> {{ item.module.libelle
+                          }}<br />
+                          <strong>Classe:</strong> {{ item.classe.libelle }} ({{
+                            item.classe.filiere
+                          }})<br />
+                          <strong>Semestre:</strong> {{ item.semestre.libelle
+                          }}<br />
+                          <strong>Professeur:</strong>
+                          {{ item.professeur.prenom }} {{ item.professeur.nom
+                          }}<br />
+                          <strong>Heure Globale:</strong>
+                          {{ item.heure_globale }} <br />
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                  <div class="md:col-span-5 text-right">
+                    <div class="inline-flex items-end">
+                      <button
+                      [disabled]="useForm.invalid"
+                      (click)="addSession()"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        AJouter
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col relative w-[30%]">
+    <div class="join mt-20">
+      <div>
+        <div>
+          <input
+            [disabled]="isSelectCours"
+            (input)="filterCours()"
+            [(ngModel)]="searchText"
+            class="input input-bordered join-item"
+            placeholder="Chercher un cours"
+          />
+        </div>
+      </div>
+      <button class="btn join-item bg-gray-900 text-white" disabled>
+        search
+      </button>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-7 absolute top-32 left-0">
+      <ng-container *ngFor="let cours of filteredCours">
+        <div class="p-4 border rounded-lg shadow-md bg-blue-950 text-white">
+          <strong>Module:</strong> {{ cours.module.libelle }}<br />
+          <strong>Classe:</strong> {{ cours.classe.libelle }} ({{
+            cours.classe.filiere
+          }})<br />
+          <strong>Semestre:</strong> {{ cours.semestre.libelle }}<br />
+          <strong>Professeur:</strong> {{ cours.professeur.nom }}
+          {{ cours.professeur.prenom }}<br />
+
+          <button
+            (click)="selectCours(cours.id)"
+            class="bg-green-500 rounded p-1"
+          >
+            Sélectionner
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { coursResolver } from './resolver/cours.resolver';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { PublicComponent } from './public/public.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,7 +24,11 @@ const routes: Routes = [
         (m) => m.SessionCoursModule
       ),
     canActivate: [AuthGuardService],
-    data: { roles: ['attache'] },
+    data: { roles: ['responsable'] },
+    resolve: { data: coursResolver },
+  },
+  {
+    path: 'home', component: PublicComponent, 
   },
   { path: '**', component: PageNotFoundComponent },
 ];
