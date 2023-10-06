@@ -16,28 +16,28 @@ class ClasseSeeder extends Seeder
             [
                 'id' => 1,
                 'libelle' => 'STI',
-                'filiere' => 'Informatique',
+                'filiere_id' => '1',
                 'niveau_id' => '1',
                 'effectif' => '30'
             ],
             [
                 'id' => 2,
                 'libelle' => 'RES',
-                'filiere' => 'Reseaux',
+                'filiere_id' => '2',
                 'niveau_id' => '1',
-                'effectif' => '30'
+                'effectif' => '20'
             ],
             [
                 'id' => 3,
                 'libelle' => 'GC',
-                'filiere' => 'Genie Civil',
+                'filiere_id' => '3',
                 'niveau_id' => '2',
                 'effectif' => '30'
             ],
             [
                 'id' => 4,
                 'libelle' => 'LOG',
-                'filiere' => 'Logistique',
+                'filiere_id' => '4',
                 'niveau_id' => '3',
                 'effectif' => '30'
             ]

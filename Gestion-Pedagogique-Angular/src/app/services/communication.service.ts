@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Cours } from '../interfaces/cours';
+import { Session } from '../interfaces/session';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ export class CommunicationService {
   public deletedCoursId = new Subject<number|undefined>();
   public updatedCours = new Subject<Cours>();
   public modifiedCours = new Subject<Cours>();
-  public sessionData = new Subject<any>();
+  public sessionData = new Subject<Session[]>();
+  public sessionId = new Subject<number>();
+  public updatedSession = new Subject<Session>();
+  public doneUpdate = new Subject<Session>();
 
   SendDeletedCours(id:number|undefined){
     this.deletedCoursId.next(id);
@@ -24,8 +28,17 @@ export class CommunicationService {
   SendModifiedCours(data: Cours){
     this.modifiedCours.next(data);
   }
-  SendSessionData(data: any){
+  SendSessionData(data: Session[]){
     this.sessionData.next(data);
+  }
+  SendSessionId(id: number){
+    this.sessionId.next(id);
+  }
+  SendUpdatedSession(data: Session){
+    this.updatedSession.next(data);
+  }
+  SendDoneUpdate(data: Session){
+    this.doneUpdate.next(data);
   }
   
 }

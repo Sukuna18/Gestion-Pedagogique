@@ -28,7 +28,7 @@
                 >
                   <strong>Module:</strong> {{ item.module.libelle }}<br />
                   <strong>Classe:</strong> {{ item.classe.libelle }} ({{
-                    item.classe.filiere
+                    item.classe.effectif
                   }})<br />
                   <strong>Semestre:</strong> {{ item.semestre.libelle }}<br />
                   <strong>Professeur:</strong> {{ item.professeur.prenom }}
@@ -108,7 +108,9 @@
                     </small>
                   </div>
 
-                  <div class="md:col-span-2">
+                  <div class="md:col-span-2"
+                  *ngIf="useForm.get('en_ligne')?.value == 0"
+                  >
                     <label for="full_name">Salles</label>
                     <select
                       formControlName="salle_id"
@@ -116,7 +118,7 @@
                       id="salle"
                       class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                     >
-                      <option *ngFor="let item of data.salles">
+                      <option [value]="item.id" *ngFor="let item of data.salles">
                         {{ item.libelle }} : effectif ({{ item.capacite }})
                       </option>
                     </select>
@@ -124,6 +126,7 @@
                   <div class="">
                     <label for="full_name">Format Cours</label>
                     <select
+                    (change)="handleFormat()"
                       formControlName="en_ligne"
                       name="salle"
                       id="salle"
@@ -151,7 +154,7 @@
                           <strong>Module:</strong> {{ item.module.libelle
                           }}<br />
                           <strong>Classe:</strong> {{ item.classe.libelle }} ({{
-                            item.classe.filiere
+                            item.classe.effectif
                           }})<br />
                           <strong>Semestre:</strong> {{ item.semestre.libelle
                           }}<br />
@@ -185,7 +188,7 @@
     </div>
   </div>
   <div class="flex flex-col relative w-[30%]">
-    <div class="join mt-20">
+    <div class="join mt-24">
       <div>
         <div>
           <input
@@ -206,7 +209,7 @@
         <div class="p-4 border rounded-lg shadow-md bg-blue-950 text-white">
           <strong>Module:</strong> {{ cours.module.libelle }}<br />
           <strong>Classe:</strong> {{ cours.classe.libelle }} ({{
-            cours.classe.filiere
+            cours.classe.effectif
           }})<br />
           <strong>Semestre:</strong> {{ cours.semestre.libelle }}<br />
           <strong>Professeur:</strong> {{ cours.professeur.nom }}

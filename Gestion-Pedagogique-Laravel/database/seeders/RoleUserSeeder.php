@@ -34,6 +34,6 @@ class RoleUserSeeder extends Seeder
                 'user_id' => 5,
             ]
         ];
-        \App\Models\RoleUser::insert($data);
+        \App\Models\RoleUsers::insert($data);
     }
 }

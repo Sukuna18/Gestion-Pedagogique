@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('nb_heures');
             $table->boolean('annuler')->default(false);
             $table->foreignIdFor(Cours::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Salle::class)->constrained()->nullable()->cascadeOnDelete();
+            $table->foreignIdFor(Salle::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

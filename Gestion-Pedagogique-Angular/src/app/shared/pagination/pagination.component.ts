@@ -17,4 +17,18 @@ export class PaginationComponent {
       this.pageChange.emit(newPage);
     }
   }
+  // get totalPages(): number {
+  //   return Math.ceil(this.data.length / this.itemsPerPage);
+  // }
+  
+  // setCurrentPage(pageNumber: number): void {
+  //   if (pageNumber >= 1 && pageNumber <= this.totalPages) {
+  //     this.currentPage = pageNumber;
+  //   }
+  // }
+
+  // get paginatedArticles(): Cours[] {
+  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  //   return this.data.slice(startIndex, startIndex + this.itemsPerPage);
+  // }
 }

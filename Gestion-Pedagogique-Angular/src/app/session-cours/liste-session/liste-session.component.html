@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 <h1 class="text-3xl underline text-center">Liste des Sessions</h1>
 <div class="timetable">
     <div class="week-names">
@@ -58,7 +58,7 @@
       <div class="weekend"></div>
       <div class="weekend"></div>
       <div>
-        <div class="accent-purple-gradient"></div>
+        <div class="accent-purple-gradient">hello</div>
       </div>
       <div></div>
       <div></div>
@@ -75,4 +75,49 @@
       <div class="weekend"></div>
     </div>
   </div>
+</div> -->
+
+<div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10 max-w-full-lg mt-20 min-h-screen">
+  <div class="flex justify-end">
+  <div class="form-control">
+    <label class="input-group">
+      <span>Date</span>
+      <input type="date" class="input input-bordered"
+        (change)="filterByDate($event)"
+       [defaultValue]="today | date: 'yyyy-MM-dd'"
+      />
+    </label>
+  </div>
 </div>
+  <table class="w-full table-fixed">
+      <thead>
+          <tr class="bg-gray-100">
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Heure Debut</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Heure Debut</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">date</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Format</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Modules</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Classe</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Professeur</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Annuler</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Duree</th>
+              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Actions</th>
+          </tr>
+      </thead>
+      <tbody class="bg-white">
+          <tr app-items *ngFor="let item of data" [data]="item">
+
+            
+          </tr>
+      </tbody>
+  </table>
+</div>
+<!-- <app-pagination
+[currentPage]="currentPage"
+[totalPages]="totalPages"
+(pageChange)="setCurrentPage($event)"
+></app-pagination> -->
+
+
+
+

@@ -9,6 +9,7 @@ import { Professeur } from '../interfaces/professeur';
 import { Salle } from '../interfaces/salle';
 import { CommunicationService } from '../services/communication.service';
 import { Semestre } from '../interfaces/semestre';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-session-cours',
@@ -17,13 +18,12 @@ import { Semestre } from '../interfaces/semestre';
 })
 export class SessionCoursComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private communicationService: CommunicationService) { }
+  constructor(private activatedRoute: ActivatedRoute, private communicationService: CommunicationService, private sessionService: SessionService) { }
   data: { cours: Cours[], salles: Salle[], classes: Classe[], modules:Module[], professeurs: Professeur[], annees: Annee, semestres: Semestre[]} = {cours: [], classes: [], modules:[], professeurs:[],salles:[], semestres:[], annees:Object.create(null)}; 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({data}) => {
       this.data = data;
     });
-      
   }
 
     

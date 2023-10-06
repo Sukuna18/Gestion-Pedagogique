@@ -14,6 +14,16 @@ class SessionCoursRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "date" => $this->date,
+            "heure_debut" => $this->heure_debut,
+            "heure_fin" => $this->heure_fin,
+            "cours" => CoursRessource::make($this->cours),
+            "salle" => $this->salle,
+            "nb_heures" => $this->nb_heures,
+            "en_ligne" => $this->en_ligne,
+            "annuler" => $this->annuler,
+        ];
     }
 }

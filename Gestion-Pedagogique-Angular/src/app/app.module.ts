@@ -20,7 +20,7 @@ import { PublicComponent } from './public/public.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {

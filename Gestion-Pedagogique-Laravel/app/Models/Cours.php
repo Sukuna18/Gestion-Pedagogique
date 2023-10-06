@@ -19,6 +19,7 @@ class Cours extends Model
         'professeur_id',
         'semestre_id',
         'annee_id',
+        'termine'
     ];
     public function module()
     {
@@ -39,5 +40,9 @@ class Cours extends Model
     public function annee()
     {
         return $this->belongsTo(AnneeScolaire::class);
+    }
+    public function sessions()
+    {
+        return $this->hasMany(SessionCours::class);
     }
 }
