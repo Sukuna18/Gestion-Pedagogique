@@ -70,7 +70,7 @@ export abstract class RequestSharedService<T extends RestResponse<T>> {
       catchError(this.handleError)
     );
   }
-  private handleError(error: HttpErrorResponse) {
+  protected handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
 
       // A client-side or network error occurred. Handle it accordingly.

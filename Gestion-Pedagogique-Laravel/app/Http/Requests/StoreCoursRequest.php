@@ -22,7 +22,11 @@ class StoreCoursRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'heure_globale' => ['required', 'numeric'],
+            'module_id' => ['required', 'exists:modules,id'],
+            'classe_id' => ['required', 'exists:classes,id'],
+            'professeur_id' => ['required', 'exists:professeurs,id'],
+            'semestre_id' => ['required', 'exists:semestres,id'],
         ];
     }
 }

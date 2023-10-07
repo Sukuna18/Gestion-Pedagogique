@@ -22,7 +22,11 @@ class UpdateCoursRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'heure_globale' => ['numeric'],
+            'module_id' => ['exists:modules,id'],
+            'classe_id' => ['exists:classes,id'],
+            'professeur_id' => ['exists:professeurs,id'],
+            'semestre_id' => ['exists:semestres,id'],
         ];
     }
 }

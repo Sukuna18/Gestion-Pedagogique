@@ -22,7 +22,12 @@ class StoreSessionCoursRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => ['required', 'date'],
+            'heure_debut' => ['required', 'date_format:H:i'],
+            'heure_fin' => ['required', 'date_format:H:i'],
+            'nb_heures' => ['required', 'numeric'],
+            'cours_id' => ['required', 'exists:cours,id'],
+            'salle_id' => ['exists:salles,id', 'nullable'],
         ];
     }
 }

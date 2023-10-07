@@ -23,21 +23,21 @@ class ClasseSeeder extends Seeder
             [
                 'id' => 2,
                 'libelle' => 'RES',
-                'filiere_id' => '2',
+                'filiere_id' => '4',
                 'niveau_id' => '1',
                 'effectif' => '20'
             ],
             [
                 'id' => 3,
                 'libelle' => 'GC',
-                'filiere_id' => '3',
+                'filiere_id' => '2',
                 'niveau_id' => '2',
                 'effectif' => '30'
             ],
             [
                 'id' => 4,
                 'libelle' => 'LOG',
-                'filiere_id' => '4',
+                'filiere_id' => '3',
                 'niveau_id' => '3',
                 'effectif' => '30'
             ]

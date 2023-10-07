@@ -26,6 +26,7 @@ Route::middleware('auth:api')->group(function () {
       Route::middleware(['auth:api', 'role:responsable'])->group(function () {
         Route::apiResource("cours", "App\Http\Controllers\CoursController");
         Route::apiResource("sessions", "App\Http\Controllers\SessionCoursController");
+        Route::apiResource("inscriptions", "App\Http\Controllers\InscriptionsController");
     });   
     Route::middleware(['auth:api', 'role:attache'])->group(function () {
       //

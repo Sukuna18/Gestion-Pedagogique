@@ -36,21 +36,21 @@ class CoursController extends Controller
      */
     public function store(StoreCoursRequest $request)
     {
-        $annee = AnneeScolaire::where('active', 1)->first();
-        $cours = Cours::where('classe_id', $request->classe_id)->where('semestre_id', $request->semestre_id)->where('module_id', $request->module_id)->where('annee_id', $annee->id)->first();
-        if ($cours) {
-            return response()->json([
-                'message' => 'Ce cours existe déjà pour cette classe et ce semestre et ce module et cette année'
-            ], 422);
-        }
-        $professeur = Professeur::find($request->professeur_id);
-        $classe = Classe::find($request->classe_id);
-        if ($classe->filiere_id != $professeur->specialite->filiere_id) {
-            return response()->json([
-                'message' => 'Ce professeur ne peut pas enseigner cette classe'
-            ], 422);
-        }
         try {
+            $annee = AnneeScolaire::where('active', 1)->first();
+            $cours = Cours::where('classe_id', $request->classe_id)->where('semestre_id', $request->semestre_id)->where('module_id', $request->module_id)->where('annee_id', $annee->id)->first();
+            if ($cours) {
+                return response()->json([
+                    'message' => 'Ce cours existe déjà pour cette classe et ce semestre et ce module et cette année'
+                ], 422);
+            }
+            $professeur = Professeur::find($request->professeur_id);
+            $classe = Classe::find($request->classe_id);
+            if ($classe->filiere_id != $professeur->specialite->filiere_id) {
+                return response()->json([
+                    'message' => 'Ce professeur ne peut pas enseigner cette classe'
+                ], 422);
+            }
             $data = Cours::create([
                 'heure_globale' => $request->heure_globale,
                 'module_id' => $request->module_id,
@@ -89,6 +89,13 @@ class CoursController extends Controller
     public function update(UpdateCoursRequest $request, Cours $cours)
     {
         try {
+            $professeur = Professeur::find($request->professeur_id);
+            $classe = Classe::find($request->classe_id);
+            if ($classe->filiere_id != $professeur->specialite->filiere_id) {
+                return response()->json([
+                    'message' => 'Ce professeur ne peut pas enseigner cette classe'
+                ], 422);
+            }
             $cours->update([
                 'heure_globale' => $request->heure_globale,
                 'module_id' => $request->module_id,

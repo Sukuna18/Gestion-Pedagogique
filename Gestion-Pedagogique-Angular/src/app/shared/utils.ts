@@ -13,3 +13,27 @@ export function sontTableauxIdentiques(tab1:any[], tab2:any[]):boolean {
 
   return true;
 }
+export function csvToJson(csv: string, separator = ','): any[] {
+  let lines = csv.split('\n');
+  let result = [];
+  let headers = lines[0].split(separator);
+  for (let i = 1; i < lines.length; i++) {
+    let obj:Record<string, string> = {};
+    let currentline = lines[i].split(separator);
+    for (let j = 0; j < headers.length; j++) {
+      obj[slugify(headers[j])] = currentline[j];
+    }
+    result.push(obj);
+  }
+  return result;
+}
+function slugify(text: string, separator = '_'): string {
+  return text
+    .toString()
+    .normalize('NFD') // split an accented letter in the base letter and the acent
+    .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 ]/g, ' ') // remove all chars not letters, numbers and spaces (to be replaced)
+    .replace(/\s+/g, separator);
+}

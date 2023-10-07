@@ -37,6 +37,7 @@ class SessionCoursController extends Controller
      */
     public function store(StoreSessionCoursRequest $request)
     {
+        try {
         $session = SessionCours::where('salle_id', $request->salle_id)
             ->where('date', Carbon::parse($request->date)->format('Y-m-d'))
             ->where('heure_debut', $request->heure_debut)
@@ -46,9 +47,8 @@ class SessionCoursController extends Controller
             return response()->json(['message' => 'Une session de cours est déjà programmée dans cette salle à cette date et heure'], 422);
         }
         if (SessionCours::isOverTime($request->cours_id, $request->heure_debut, $request->heure_fin) == true) {
-            throw new \Exception("l'horaire choisie dépasse l'horaire globale du cours");
+            return response()->json(['message' => "l'horaire choisie dépasse l'horaire globale du cours"], 422);
         }
-        try {
             $data = SessionCours::create([
                 'date' => Carbon::parse($request->date)->format('Y-m-d'),
                 'heure_debut' => $request->heure_debut,
@@ -85,6 +85,7 @@ class SessionCoursController extends Controller
      */
     public function update(UpdateSessionCoursRequest $request, SessionCours $session)
     {
+        try {
         $sessions = SessionCours::where('salle_id', $request->salle_id)
             ->where('date', Carbon::parse($request->date)->format('Y-m-d'))
             ->where('heure_debut', $request->heure_debut)
@@ -94,10 +95,8 @@ class SessionCoursController extends Controller
             return response()->json(['message' => 'Une session de cours est déjà programmée dans cette salle à cette date et heure'], 422);
         }
         if (SessionCours::isOverTime($request->cours_id, $request->heure_debut, $request->heure_fin) == true) {
-            throw new \Exception("l'horaire choisie dépasse l'horaire globale du cours");
+            return response()->json(['message' => "l'horaire choisie dépasse l'horaire globale du cours"], 422);
         }
-        try {
-
             $session->update([
                 'date' => $request->date,
                 'heure_debut' => $request->heure_debut,
@@ -124,12 +123,5 @@ class SessionCoursController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Une erreur est survenue lors de la suppression de la session de cours'], 422);
         }
-    }
-    public function searchByDate(Request $request)
-    {
-        $date = $request->date;
-        dd($date);
-        $sessions = SessionCours::where('date', $date)->get();
-        return SessionCoursRessource::collection($sessions);
     }
 }

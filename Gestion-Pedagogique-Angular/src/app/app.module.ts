@@ -14,7 +14,7 @@ import { PublicComponent } from './public/public.component';
     AppComponent,
     PageNotFoundComponent,
     LoginComponent,
-    PublicComponent
+    PublicComponent,
   ],
   imports: [
     BrowserModule,

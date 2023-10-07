@@ -29,5 +29,7 @@ deleteItem(id: number | undefined) {
 }
   updateItem() {
     this.shared.SendUpdatedSession(this.data as Session);
+    console.log(this.data);
+    
   }
 }

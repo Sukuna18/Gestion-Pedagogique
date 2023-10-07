@@ -43,4 +43,6 @@ get paginatedArticles(): Session[] {
   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
   return this.data.slice(startIndex, startIndex + this.itemsPerPage);
 }
+filtrerByHour(e: any){
+}
 }

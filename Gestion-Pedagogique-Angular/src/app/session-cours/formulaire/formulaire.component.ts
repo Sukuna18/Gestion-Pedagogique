@@ -67,14 +67,16 @@ export class FormulaireComponent implements OnInit {
       this.selectedCours = []
       this.selectedCours.push(data.cours);
       this.updatedSessionId = data.id;
+      console.log(data.heure_debut, data.heure_fin, data);
+      
       this.useForm.patchValue({
         date: data.date,
         heure_debut: data.heure_debut.split(':')[0] + ':' + data.heure_debut.split(':')[1],
         heure_fin: data.heure_fin.split(':')[0] + ':' + data.heure_fin.split(':')[1],
         en_ligne: data.en_ligne,
-        salle_id: data.salle.id
+        salle_id: data.en_ligne == true ? null : data.salle.id
       })
-      console.log(data.salle.id);
+      console.log(data);
       
      });
   }
@@ -309,6 +311,7 @@ export class FormulaireComponent implements OnInit {
     }
     }
     private resetForm() {
+      this.isSelectCours = false;
       this.useForm.reset();
       this.useForm.patchValue({ en_ligne: 1, salle_id: null });
       this.selectedCours = [];

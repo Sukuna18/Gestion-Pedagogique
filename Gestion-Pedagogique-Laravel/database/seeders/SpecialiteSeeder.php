@@ -19,15 +19,15 @@ class SpecialiteSeeder extends Seeder
             ],
             [
                 'libelle' => 'Sys Admin',
-                'filiere_id' => '2'
+                'filiere_id' => '4'
             ],
             [
                 'libelle' => 'Architecte',
-                'filiere_id' => '3'
+                'filiere_id' => '2'
             ],
             [
                 'libelle' => 'Logistique',
-                'filiere_id' => '4'
+                'filiere_id' => '3'
             ]
         ];
         \App\Models\Specialite::insert($specialites);

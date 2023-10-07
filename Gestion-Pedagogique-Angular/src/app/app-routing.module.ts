@@ -28,6 +28,11 @@ const routes: Routes = [
     resolve: { data: coursResolver },
   },
   {
+    path: 'inscriptions', loadChildren: () => import('./inscriptions/inscriptions.module').then(m => m.InscriptionsModule),
+    canActivate: [AuthGuardService],
+    data: { roles: ['responsable'] },
+  },
+  {
     path: 'home', component: PublicComponent, 
   },
   { path: '**', component: PageNotFoundComponent },
