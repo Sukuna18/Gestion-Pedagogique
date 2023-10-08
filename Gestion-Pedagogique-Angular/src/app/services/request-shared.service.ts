@@ -70,6 +70,14 @@ export abstract class RequestSharedService<T extends RestResponse<T>> {
       catchError(this.handleError)
     );
   }
+  getById(id: number): Observable<T> {
+    return this.http.get<T>(environment.api.baseUrl + `/${this.uri()}/${id}`).pipe(
+      tap((response: any): void => {
+        console.log(response);
+      }),
+      catchError(this.handleError)
+    );
+  }
   protected handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
 

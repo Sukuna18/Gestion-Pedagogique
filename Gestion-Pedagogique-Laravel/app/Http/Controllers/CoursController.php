@@ -70,15 +70,15 @@ class CoursController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cours $cours)
+    public function show(Cours $cour)
     {
-        //
+        return new CoursRessource($cour);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cours $cours)
+    public function edit(Cours $cour)
     {
         //
     }
@@ -86,7 +86,7 @@ class CoursController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCoursRequest $request, Cours $cours)
+    public function update(UpdateCoursRequest $request, Cours $cour)
     {
         try {
             $professeur = Professeur::find($request->professeur_id);
@@ -96,14 +96,14 @@ class CoursController extends Controller
                     'message' => 'Ce professeur ne peut pas enseigner cette classe'
                 ], 422);
             }
-            $cours->update([
+            $cour->update([
                 'heure_globale' => $request->heure_globale,
                 'module_id' => $request->module_id,
                 'classe_id' => $request->classe_id,
                 'professeur_id' => $request->professeur_id,
                 'semestre_id' => $request->semestre_id,
             ]);
-            return new CoursRessource($cours);
+            return new CoursRessource($cour);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Une erreur est survenue lors de la modification du cours'
@@ -114,10 +114,10 @@ class CoursController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cours $cours)
+    public function destroy(Cours $cour)
     {
         try {
-            $cours->delete();
+            $cour->delete();
             return response()->json([
                 'message' => 'Cours supprimé avec succès'
             ]);

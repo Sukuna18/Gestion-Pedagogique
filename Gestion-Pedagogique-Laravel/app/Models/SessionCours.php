@@ -20,7 +20,15 @@ class SessionCours extends Model
         'annuler'
 
     ];
-
+    
+    public function cours()
+    {
+        return $this->belongsTo(Cours::class);
+    }
+    public function salle()
+    {
+        return $this->belongsTo(Salle::class);
+    }
      public static function isOverTime(string $cours_id, string $heure_debut, string $heure_fin){
         $cours = Cours::find($cours_id);
         $sessionsCours = SessionCours::where('cours_id', $cours_id)->get();
@@ -30,14 +38,6 @@ class SessionCours extends Model
             return true;
         }
         return false;
-    }
-    public function cours()
-    {
-        return $this->belongsTo(Cours::class);
-    }
-    public function salle()
-    {
-        return $this->belongsTo(Salle::class);
     }
 
     protected static function booted()

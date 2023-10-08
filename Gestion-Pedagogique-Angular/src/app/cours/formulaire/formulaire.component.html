@@ -1,63 +1,133 @@
-<!-- component -->
-<div class="p-6 bg-gray-100 flex items-center justify-center">
-    <div class="container max-w-screen-lg mx-auto">
-      <div>
-        <h1 class="font-semibold text-2xl text-gray-600">Plannification Cours</h1>
-        <p class="text-gray-500 mb-6">{{data.annees.libelle}}</p>
-  
-        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-          <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 ">
-            <div class="text-gray-600">
-              <p class="font-medium text-lg">Sonatel School</p>
-              <img src="https://img.freepik.com/free-vector/gradient-high-school-logo-design_23-2149626932.jpg" class="h-20 w-20 mr-3" alt="Flowbite Logo" />
-            </div>
-            <form action="" [formGroup]="useForm">
+<div class="p-4 sm:ml-64 max-w-full">
+  <!-- component -->
 
-            <div class="lg:col-span-2">
-              <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                <div class="md:col-span-2">
-                  <label for="full_name">Classes</label>
-                  <select formControlName="classe_id" name="full_name" id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
-                    <option [value]="item.id" *ngFor="let item of data.classes">{{item.libelle}}</option>
+  <section class="py-1 bg-white w-full">
+    <div class="w-full px-4 mx-auto mt-6">
+      <div
+        class="relative flex flex-col break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+      >
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+          <div class="text-center flex justify-between">
+            <h6 class="text-gray-700 text-xl font-bold">{{data.annees.libelle}}</h6>
+            <button
+              (click)="!isEdit ? addCours() : editerCours()"
+              [disabled]="useForm.value.heure_globale == 0"
+              class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+              type="button"
+            >
+              {{ isEdit ? "Editer un cours" : "Ajouter un cours" }}
+            </button>
+          </div>
+        </div>
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+          <form [formGroup]="useForm">
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Cours Information
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Classes
+                  </label>
+                  <select
+                    formControlName="classe_id"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    value="lucky.jesse"
+                  >
+                    <option [value]="item.id" *ngFor="let item of data.classes">
+                      {{ item.libelle }}
+                    </option>
                   </select>
                 </div>
-  
-                <div class="md:col-span-2">
-                    <label for="full_name">Professeurs</label>
-                    <select formControlName="professeur_id" name="professeur" id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" >
-                      <option [value]="item.id" *ngFor="let item of data.professeurs">{{item.prenom}} {{item.nom}}</option>
-                    </select>
-                  </div>
-  
-                  <div class="md:col-span-2">
-                    <label for="full_name">Modules</label>
-                    <select formControlName="module_id" name="module" id="module" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" >
-                      <option [value]="item.id" *ngFor="let item of data.modules">{{item.libelle}}</option>
-                    </select>
-                  </div>
-  
-                  <div class="md:col-span-2">
-                    <label for="full_name">Semestres</label>
-                    <select formControlName="semestre_id" name="semestre" id="semestre" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" >
-                      <option [value]="item.id" *ngFor="let item of data.semestres">{{item.libelle}}</option>
-                    </select>
-                  </div>
-
-                <div class="md:col-span-1">
-                  <label for="heure">Heure Globale</label>
-                  <input (input)="handleGlobalHour()" type="number" formControlName="heure_globale" name="heure" id="heure" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder=""/>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Professeurs
+                  </label>
+                  <select
+                    formControlName="professeur_id"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    value="lucky.jesse"
+                  >
+                    <option
+                      [value]="item.id"
+                      *ngFor="let item of data.professeurs"
+                    >
+                      {{ item.prenom }} {{ item.nom }}
+                    </option>
+                  </select>
                 </div>
-        
-                <div class="md:col-span-5 text-right">
-                  <div class="inline-flex items-end">
-                    <button (click)="!isEdit ? addCours(): editerCours()" [disabled]="useForm.value.heure_globale == 0" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ isEdit ? "Editer un cours" : "Ajouter un cours" }}</button>
-                  </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Modules
+                  </label>
+                  <select
+                    formControlName="module_id"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    value="lucky.jesse"
+                  >
+                    <option [value]="item.id" *ngFor="let item of data.modules">
+                      {{ item.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Semestres
+                  </label>
+                  <select
+                    formControlName="semestre_id"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    value="lucky.jesse"
+                  >
+                    <option
+                      [value]="item.id"
+                      *ngFor="let item of data.semestres"
+                    >
+                      {{ item.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Heure Globale
+                  </label>
+                  <input
+                    formControlName="heure_globale"
+                    type="number"
+                    (input)="handleGlobalHour()"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    value="lucky.jesse"
+                  />
                 </div>
               </div>
             </div>
           </form>
-          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+</div>

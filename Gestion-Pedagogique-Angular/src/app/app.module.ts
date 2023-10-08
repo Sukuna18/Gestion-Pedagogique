@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { TokenInterceptor } from './shared/token.interceptor';
 import { PublicComponent } from './public/public.component';
+import { UiDesignTestComponent } from './ui-design-test/ui-design-test.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PublicComponent } from './public/public.component';
     PageNotFoundComponent,
     LoginComponent,
     PublicComponent,
+    UiDesignTestComponent,
   ],
   imports: [
     BrowserModule,

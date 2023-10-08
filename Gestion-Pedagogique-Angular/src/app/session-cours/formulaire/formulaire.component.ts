@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Annee } from 'src/app/interfaces/annee';
 import { Classe } from 'src/app/interfaces/classe';
 import { Cours } from 'src/app/interfaces/cours';
@@ -25,7 +26,6 @@ export class FormulaireComponent implements OnInit {
   filteredCours: Cours[] = [];
   selectedClasseId: number = 1;
   selectedProfesseurId: number = 1;
-  sessionData: Partial<Session[]> = [];
   filtreValue: string = '';
   searchText: string = '';
   regexHeure = '^[0-9]{2}:[0-9]{2}$';
@@ -60,39 +60,54 @@ export class FormulaireComponent implements OnInit {
     salle_id: [null],
   });
   ngOnInit(): void {
-    this.getAllSession();
-    this.shared.updatedSession.subscribe((data) => {
-      this.cours_id = data.cours_id;
-      this.isEdit = true;
-      this.selectedCours = []
-      this.selectedCours.push(data.cours);
-      this.updatedSessionId = data.id;
-      console.log(data.heure_debut, data.heure_fin, data);
+    // this.shared.updatedSession.subscribe((data) => {
+    //   this.cours_id = data.cours_id;
+    //   this.isEdit = true;
+    //   this.selectedCours = []
+    //   this.selectedCours.push(data.cours);
+    //   this.updatedSessionId = data.id;
+    //   console.log(data.heure_debut, data.heure_fin, data);
       
-      this.useForm.patchValue({
-        date: data.date,
-        heure_debut: data.heure_debut.split(':')[0] + ':' + data.heure_debut.split(':')[1],
-        heure_fin: data.heure_fin.split(':')[0] + ':' + data.heure_fin.split(':')[1],
-        en_ligne: data.en_ligne,
-        salle_id: data.en_ligne == true ? null : data.salle.id
-      })
-      console.log(data);
+    //   this.useForm.patchValue({
+    //     date: data.date,
+    //     heure_debut: data.heure_debut.split(':')[0] + ':' + data.heure_debut.split(':')[1],
+    //     heure_fin: data.heure_fin.split(':')[0] + ':' + data.heure_fin.split(':')[1],
+    //     en_ligne: data.en_ligne,
+    //     salle_id: data.en_ligne == true ? null : data.salle.id
+    //   })
+    //   console.log(data);
       
-     });
+    //  });
+    this.route.params.subscribe((params) => {
+      const id = params['id'];
+      if(id){
+        this.sessionService.getById(id).subscribe((response: any) => {
+          this.cours_id = response.data.cours_id;
+          this.isEdit = true;
+          this.selectedCours = []
+          this.selectedCours.push(response.data.cours);
+          this.updatedSessionId = response.data.id;
+          console.log(response.data.heure_debut, response.data.heure_fin, response.data);
+          
+          this.useForm.patchValue({
+            date: response.data.date,
+            heure_debut: response.data.heure_debut.split(':')[0] + ':' + response.data.heure_debut.split(':')[1],
+            heure_fin: response.data.heure_fin.split(':')[0] + ':' + response.data.heure_fin.split(':')[1],
+            en_ligne: response.data.en_ligne,
+            salle_id: response.data.en_ligne == true ? null : response.data.salle.id
+          })
+          console.log(response.data);
+        })
+      }
+    });
   }
 
   constructor(
     private fb: FormBuilder,
     private sessionService: SessionService,
-    private shared: CommunicationService
+    private shared: CommunicationService,
+    private route : ActivatedRoute
   ) {}
-  getAllSession() {
-    this.sessionService.getAll().subscribe((data) => {
-      console.log(data.data);
-      this.sessionData = data.data;
-      this.shared.SendSessionData(data.data);
-    });
-  }
   filterCours() {
     console.log(this.searchText);
 
@@ -279,8 +294,6 @@ export class FormulaireComponent implements OnInit {
           })
           .subscribe((res) => {
             console.log(res);
-            let response = (res as any).data;  
-            this.sessionData.push(response);
           });
       });
       this.resetForm();
@@ -292,7 +305,6 @@ export class FormulaireComponent implements OnInit {
           id: this.updatedSessionId,
           nb_heures: duree
         }).subscribe((res: any) => {
-          this.sessionData[this.sessionData.findIndex(item => item?.id == res.data.id)] = res.data;          
           this.isEdit = false;
           this.resetForm();
         });

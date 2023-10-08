@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cours } from 'src/app/interfaces/cours';
+import { CommunicationService } from 'src/app/services/communication.service';
+import { CoursService } from 'src/app/services/cours.service';
 
 @Component({
   selector: 'app-liste',
@@ -7,11 +9,21 @@ import { Cours } from 'src/app/interfaces/cours';
   styleUrls: ['./liste.component.css']
 })
 export class ListeComponent implements OnInit {
-  @Input() data: Cours[] = [];
+  constructor(private coursService: CoursService, private shared: CommunicationService) { }
+  data: Cours[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.coursService.getAll().subscribe((res: {data:Cours[]}) => {
+      this.data = res.data;
+    });
+  }
+  deleteCours(id: number) {
+    this.coursService.delete(id).subscribe((res: any) => {
+      this.data = this.data.filter((cours) => cours.id !== id);
+    });
+  }
 
   get totalPages(): number {
     return Math.ceil(this.data.length / this.itemsPerPage);

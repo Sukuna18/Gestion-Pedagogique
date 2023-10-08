@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cours } from 'src/app/interfaces/cours';
-import { CommunicationService } from 'src/app/services/communication.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class ItemsComponent implements OnInit {
 @Input() cours: Cours = {} as Cours;
-  constructor(private CommunicationService: CommunicationService) { }
+@Output() deletedId: EventEmitter<number> = new EventEmitter();
+  constructor(private router: Router) { }
 
   ngOnInit(): void {  }
   deleteItems(id:number|undefined){
@@ -25,11 +26,11 @@ export class ItemsComponent implements OnInit {
       confirmButtonText: 'Oui, supprimer!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.CommunicationService.SendDeletedCours(id);
+        this.deletedId.emit(id as number);
       }
     })
   }
   editItems(){
-    this.CommunicationService.SendUpdatedCours(this.cours as Cours);
+    this.router.navigate(['/cours/edit', this.cours.id]);
   }
 }

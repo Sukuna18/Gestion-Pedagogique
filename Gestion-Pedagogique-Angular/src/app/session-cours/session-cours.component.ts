@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AllService } from '../services/all.service';
 import { ActivatedRoute } from '@angular/router';
 import { Annee } from '../interfaces/annee';
 import { Classe } from '../interfaces/classe';
@@ -18,7 +17,7 @@ import { SessionService } from '../services/session.service';
 })
 export class SessionCoursComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private communicationService: CommunicationService, private sessionService: SessionService) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
   data: { cours: Cours[], salles: Salle[], classes: Classe[], modules:Module[], professeurs: Professeur[], annees: Annee, semestres: Semestre[]} = {cours: [], classes: [], modules:[], professeurs:[],salles:[], semestres:[], annees:Object.create(null)}; 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({data}) => {

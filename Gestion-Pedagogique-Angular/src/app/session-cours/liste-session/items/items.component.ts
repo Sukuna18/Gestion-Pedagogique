@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Session } from 'src/app/interfaces/session';
-import { CommunicationService } from 'src/app/services/communication.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,9 +8,11 @@ import Swal from 'sweetalert2';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css']
 })
-export class ItemsComponent {
+export class ItemsComponent implements OnInit {
+  ngOnInit(): void {}
 @Input() data: Partial<Session> ={} 
-constructor(private shared: CommunicationService) { }
+@Output() deletedId: EventEmitter<number> = new EventEmitter();
+constructor(private router: Router) { }
 deleteItem(id: number | undefined) {
   Swal.fire({
     title: 'Êtes-vous sûr?',
@@ -23,13 +25,11 @@ deleteItem(id: number | undefined) {
     cancelButtonText: 'Annuler'
   }).then((result) => {
     if (result.isConfirmed) {
-      this.shared.SendSessionId(id as number);
+      this.deletedId.emit(id as number);
     }
   })
 }
   updateItem() {
-    this.shared.SendUpdatedSession(this.data as Session);
-    console.log(this.data);
-    
+    this.router.navigate(['sessions/edit', this.data.id]);
   }
 }

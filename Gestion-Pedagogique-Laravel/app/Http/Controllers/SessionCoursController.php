@@ -69,7 +69,7 @@ class SessionCoursController extends Controller
      */
     public function show(SessionCours $session)
     {
-        //
+        return new SessionCoursRessource($session);
     }
 
     /**
