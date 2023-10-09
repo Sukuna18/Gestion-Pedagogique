@@ -46,6 +46,19 @@ get paginatedArticles(): Session[] {
   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
   return this.data.slice(startIndex, startIndex + this.itemsPerPage);
 }
-filtrerByHour(e: any){
+filtrerByEtat(e:Event){
+  const value = +(e.target as HTMLSelectElement).value;
+  this.sessionService.getAll().subscribe((response: {data:Session[]}) => {
+    if(value === 1){
+      this.data = response.data.filter((session) => session.terminer)
+    }else if(value === 0){
+      this.data = response.data.filter((session) => !session.terminer)
+    }
+    else{
+      this.sessionService.getAnnulatedSessions().subscribe((session)=>{
+        this.data = session.data
+      })
+    }
+  });
 }
 }

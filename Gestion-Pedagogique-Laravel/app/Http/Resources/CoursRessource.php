@@ -22,6 +22,7 @@ class CoursRessource extends JsonResource
             'niveau' => $this->classe->niveau,
             'annee' => $this->annee,
             'professeur' => $this->professeur,
+            "termine" => $this->termine,
             'semestre' => $this->semestre,
         ];
     }

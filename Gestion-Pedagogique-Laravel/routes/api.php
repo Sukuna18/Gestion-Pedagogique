@@ -29,7 +29,9 @@ Route::middleware('auth:api')->group(function () {
         Route::apiResource("inscriptions", "App\Http\Controllers\InscriptionsController");
     });   
     Route::middleware(['auth:api', 'role:attache'])->group(function () {
-      //
+      Route::get('sessions', [App\Http\Controllers\SessionCoursController::class, 'index']);
+      Route::put('sessions/valide/{session}', [App\Http\Controllers\SessionCoursController::class, 'validerSession']);
+      Route::put('sessions/invalide/{session}', [App\Http\Controllers\SessionCoursController::class, 'invaliderSession']);
     });    
     Route::apiResource("salles", "App\Http\Controllers\SalleController");
     Route::apiResource("modules", "App\Http\Controllers\ModuleController");
@@ -40,3 +42,4 @@ Route::middleware('auth:api')->group(function () {
     Route::get("all", "App\Http\Controllers\CoursController@allData");
   });
   Route::apiResource("users", "App\Http\Controllers\UserController");
+  Route::get('deleted-session', 'App\Http\Controllers\SessionCoursController@getDeletedSessions');

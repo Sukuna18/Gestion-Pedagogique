@@ -32,9 +32,9 @@ export class AppComponent implements OnInit{
       }
     })
   }
-  checkRouter(){
-    if(this.router.url === '/login' || this.router.url === '/inscription') return false;
-    return true;
+  isLogin(){
+    if(this.router.url === '/login' || this.router.url === '/inscription') return true;
+    return false;
   }
   isResponsable():boolean{
     let roles = localStorage.getItem('role');

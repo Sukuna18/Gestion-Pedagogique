@@ -60,26 +60,10 @@ export class FormulaireComponent implements OnInit {
     salle_id: [null],
   });
   ngOnInit(): void {
-    // this.shared.updatedSession.subscribe((data) => {
-    //   this.cours_id = data.cours_id;
-    //   this.isEdit = true;
-    //   this.selectedCours = []
-    //   this.selectedCours.push(data.cours);
-    //   this.updatedSessionId = data.id;
-    //   console.log(data.heure_debut, data.heure_fin, data);
-      
-    //   this.useForm.patchValue({
-    //     date: data.date,
-    //     heure_debut: data.heure_debut.split(':')[0] + ':' + data.heure_debut.split(':')[1],
-    //     heure_fin: data.heure_fin.split(':')[0] + ':' + data.heure_fin.split(':')[1],
-    //     en_ligne: data.en_ligne,
-    //     salle_id: data.en_ligne == true ? null : data.salle.id
-    //   })
-    //   console.log(data);
-      
-    //  });
     this.route.params.subscribe((params) => {
       const id = params['id'];
+      console.log(id);
+      
       if(id){
         this.sessionService.getById(id).subscribe((response: any) => {
           this.cours_id = response.data.cours_id;
@@ -233,7 +217,6 @@ export class FormulaireComponent implements OnInit {
         return;
       }
     }
-    console.log(splitedDate[1]);
     if (parseInt(splitedDate[0]) < parseInt(splitAnnee[1])) {
       Swal.fire({
         icon: 'error',

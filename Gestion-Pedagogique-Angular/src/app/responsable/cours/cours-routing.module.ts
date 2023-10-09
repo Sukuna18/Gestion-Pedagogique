@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule, Routes } from '@angular/router';
+import {  RouterModule, Routes } from '@angular/router';
 import { CoursComponent } from './cours.component';
 import { ListeComponent } from './liste/liste.component';
 

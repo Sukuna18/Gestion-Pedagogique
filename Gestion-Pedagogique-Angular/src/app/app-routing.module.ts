@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'cours',
     loadChildren: () =>
-      import('./cours/cours.module').then((m) => m.CoursModule),
+      import('./responsable/cours/cours.module').then((m) => m.CoursModule),
     resolve: { cours: coursResolver },
     canActivate: [AuthGuardService],
     data: { roles: ['responsable'] },
@@ -21,7 +21,8 @@ const routes: Routes = [
   {
     path: 'sessions',
     loadChildren: () =>
-      import('./session-cours/session-cours.module').then(
+      import('./responsable/session-cours/session-cours.module')
+      .then(
         (m) => m.SessionCoursModule
       ),
     canActivate: [AuthGuardService],
@@ -29,9 +30,14 @@ const routes: Routes = [
     resolve: { data: coursResolver },
   },
   {
-    path: 'inscriptions', loadChildren: () => import('./inscriptions/inscriptions.module').then(m => m.InscriptionsModule),
+    path: 'inscriptions', loadChildren: () => import('./responsable/inscriptions/inscriptions.module').then(m => m.InscriptionsModule),
     canActivate: [AuthGuardService],
     data: { roles: ['responsable'] },
+  },
+  {
+    path: 'attache', loadChildren: () => import('./attache/attache.module').then(m => m.AttacheModule),
+    canActivate: [AuthGuardService],
+    data: { roles :['attache']}
   },
   {
     path: 'home', component: PublicComponent, 

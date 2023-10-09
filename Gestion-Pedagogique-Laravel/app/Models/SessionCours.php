@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 class SessionCours extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'date',
         'heure_debut',
@@ -17,7 +18,8 @@ class SessionCours extends Model
         'salle_id',
         'nb_heures',
         'en_ligne',
-        'annuler'
+        'annuler',
+        'terminer'
 
     ];
     

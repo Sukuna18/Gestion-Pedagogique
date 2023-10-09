@@ -38,12 +38,12 @@ class SessionCoursController extends Controller
     public function store(StoreSessionCoursRequest $request)
     {
         try {
-        $session = SessionCours::where('salle_id', $request->salle_id)
+        $sessions = SessionCours::where('salle_id', $request->salle_id)
             ->where('date', Carbon::parse($request->date)->format('Y-m-d'))
             ->where('heure_debut', $request->heure_debut)
             ->where('heure_fin', $request->heure_fin)
             ->first();
-        if ($session) {
+        if ($sessions) {
             return response()->json(['message' => 'Une session de cours est déjà programmée dans cette salle à cette date et heure'], 422);
         }
         if (SessionCours::isOverTime($request->cours_id, $request->heure_debut, $request->heure_fin) == true) {
@@ -119,9 +119,32 @@ class SessionCoursController extends Controller
     {
         try {
             $session->delete();
+            $cours = Cours::find($session->cours_id);
+            $cours->update([
+                'termine' => false,
+            ]);
+
             return response()->json(['message' => 'Session de cours supprimée avec succès'], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Une erreur est survenue lors de la suppression de la session de cours'], 422);
         }
+    }
+    public function getDeletedSessions()
+    {
+        $sessions = SessionCours::onlyTrashed()->get();
+        return SessionCoursRessource::collection($sessions);
+    }
+    public function validerSession(SessionCours $session){
+        $session->update([
+            'terminer' => true,
+        ]);
+        return new SessionCoursRessource($session);
+    }
+    public function invaliderSession(SessionCours $session){
+        $session->update([
+            'terminer' => false,
+        ]);
+        
+        return new SessionCoursRessource($session);
     }
 }

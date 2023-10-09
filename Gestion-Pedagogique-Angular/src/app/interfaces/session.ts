@@ -12,5 +12,6 @@ export interface Session extends RestResponse<Session>{
     cours_id: number;
     cours: Cours;
     salle_id: number;
-    salle: Salle
+    salle: Salle;
+    terminer: boolean;
 }

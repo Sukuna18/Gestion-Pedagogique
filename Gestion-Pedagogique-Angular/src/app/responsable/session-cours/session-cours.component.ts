@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Annee } from '../interfaces/annee';
-import { Classe } from '../interfaces/classe';
-import { Cours } from '../interfaces/cours';
-import { Module } from '../interfaces/module';
-import { Professeur } from '../interfaces/professeur';
-import { Salle } from '../interfaces/salle';
-import { CommunicationService } from '../services/communication.service';
-import { Semestre } from '../interfaces/semestre';
-import { SessionService } from '../services/session.service';
+import { Annee } from 'src/app/interfaces/annee';
+import { Classe } from 'src/app/interfaces/classe';
+import { Cours } from 'src/app/interfaces/cours';
+import { Module } from 'src/app/interfaces/module';
+import { Professeur } from 'src/app/interfaces/professeur';
+import { Salle } from 'src/app/interfaces/salle';
+import { Semestre } from 'src/app/interfaces/semestre';
 
 @Component({
   selector: 'app-session-cours',

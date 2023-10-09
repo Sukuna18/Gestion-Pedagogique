@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListeComponent } from './liste/liste.component';
 import { ItemsComponent } from './liste/items/items.component';
-import { PaginationComponent } from '../shared/pagination/pagination.component';
+import { PaginationComponent } from 'src/app/shared/pagination/pagination.component'; 
 
 
 

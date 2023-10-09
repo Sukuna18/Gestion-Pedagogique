@@ -5,11 +5,9 @@
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.module?.libelle}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.classe?.libelle}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.professeur?.prenom}} {{data.cours?.professeur?.nom}}</td>
-<td [class]="'py-4 px-6 border-b border-gray-200 ' + (data.annuler ? 'text-red-500' : 'text-green-500')">
-  {{data.annuler ? 'Annuler ❌' : 'Valider ✅'}}
-</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.nb_heures}}</td>
 <td class="py-4 px-6 border-b border-gray-200">
-  <span class="cursor-pointer" (click)="deleteItem(data.id)">❌ &nbsp;</span>
-  <span class="cursor-pointer" (click)="updateItem()">&nbsp; ✏️</span>
+  <span class="cursor-pointer">👁️ </span>
+  <span class="cursor-pointer" (click)="deleteItem(data.id)">&nbsp;❌</span>
+  <span class="cursor-pointer" (click)="updateItem()">&nbsp;✏️</span>
 </td>

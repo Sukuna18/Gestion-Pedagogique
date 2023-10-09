@@ -1,0 +1,56 @@
+<div class="relative shadow-lg rounded-lg overflow-hidden max-w-full ml-[16%] min-h-screen bg-white">
+    <div class="flex justify-end">
+    <div class="form-control mt-20 mr-5">
+      <label class="input-group">
+        <span class="bg-gray-100 text-pink-600 border-none">Date</span>
+        <input type="date" class="input input-bordered bg-pink-600 text-white"
+          (change)="filterByDate($event)"
+         [defaultValue]="today | date: 'yyyy-MM-dd'"
+        />
+      </label>
+    </div>
+    <h1
+    class="absolute top-[-7%] left-6 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-600"
+  >
+    Liste Sessions
+  </h1>
+  <select (change)="filtrerByEtat($event)" class="select select-primary w-full max-w-xs absolute top-20 right-[40%] bg-white border-pink-600">
+    <option disabled selected>Filtrer par etat</option>
+    <option [value]="1">Terminé</option>
+    <option [value]="0">En cours</option>
+    <option [value]="2">Annulé</option>
+  </select>
+  </div>
+    <table class="w-full table-fixed mt-5">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Debut</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Fin</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">date</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Format</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Modules</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Classe</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Professeur</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Duree</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Restant</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            <tr app-session-items *ngFor="let item of data" [data]="item">
+  
+              
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <!-- <app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="setCurrentPage($event)"
+  ></app-pagination> -->
+  
+  
+  
+  
+  

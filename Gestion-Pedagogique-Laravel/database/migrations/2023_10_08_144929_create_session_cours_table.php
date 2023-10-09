@@ -21,8 +21,10 @@ return new class extends Migration
             $table->boolean('en_ligne')->default(false);
             $table->integer('nb_heures');
             $table->boolean('annuler')->default(false);
+            $table->boolean('terminer')->default(false);
             $table->foreignIdFor(Cours::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Salle::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

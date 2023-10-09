@@ -4,7 +4,6 @@ import { Module } from "./module";
 import { Niveau } from "./niveau";
 import { Professeur } from "./professeur";
 import { RestResponse } from "./rest-response";
-import { Salle } from "./salle";
 import { Semestre } from "./semestre";
 
 export interface Cours extends RestResponse<Cours> {
@@ -14,5 +13,6 @@ export interface Cours extends RestResponse<Cours> {
     module: Module;
     annee: Annee;
     semestre: Semestre;
-    niveau: Niveau
+    niveau: Niveau;
+    termine: boolean;
 }

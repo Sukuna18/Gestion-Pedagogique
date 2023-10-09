@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cours } from '../interfaces/cours';
-import { Classe } from '../interfaces/classe';
-import { Module } from '../interfaces/module';
-import { Professeur } from '../interfaces/professeur';
-import { Annee } from '../interfaces/annee';
-import { Semestre } from '../interfaces/semestre';
+import { Cours } from 'src/app/interfaces/cours'; 
+import { Classe } from 'src/app/interfaces/classe';
+import { Module } from 'src/app/interfaces/module';
+import { Professeur } from 'src/app/interfaces/professeur';
+import { Annee } from 'src/app/interfaces/annee';
+import { Semestre } from 'src/app/interfaces/semestre';
 
 @Component({
   selector: 'app-cours',

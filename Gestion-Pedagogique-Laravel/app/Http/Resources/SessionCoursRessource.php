@@ -22,6 +22,7 @@ class SessionCoursRessource extends JsonResource
             "cours" => CoursRessource::make($this->cours),
             "salle" => $this->salle,
             "nb_heures" => $this->nb_heures,
+            "terminer" => $this->terminer,
             "en_ligne" => $this->en_ligne,
             "annuler" => $this->annuler,
         ];

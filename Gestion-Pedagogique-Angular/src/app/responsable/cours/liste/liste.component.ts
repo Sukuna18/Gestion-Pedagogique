@@ -24,6 +24,12 @@ export class ListeComponent implements OnInit {
       this.data = this.data.filter((cours) => cours.id !== id);
     });
   }
+  filtrerParEtat(e:Event) {
+    const value = +(e.target as HTMLSelectElement).value;
+    this.coursService.getAll().subscribe((res: {data:Cours[]}) => {
+      value ? this.data = res.data.filter((cours) => cours.termine) : this.data = res.data.filter((cours) => !cours.termine);
+    });
+  }
 
   get totalPages(): number {
     return Math.ceil(this.data.length / this.itemsPerPage);

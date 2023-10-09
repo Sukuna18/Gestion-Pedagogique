@@ -93,6 +93,12 @@
 >
   Liste Sessions
 </h1>
+<select (change)="filtrerByEtat($event)" class="select select-primary w-full max-w-xs absolute top-20 right-[40%] bg-white border-pink-600">
+  <option disabled selected>Filtrer par etat</option>
+  <option [value]="1">Terminé</option>
+  <option [value]="0">En cours</option>
+  <option [value]="2">Annulé</option>
+</select>
 </div>
   <table class="w-full table-fixed mt-5">
       <thead>
@@ -104,7 +110,6 @@
               <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Modules</th>
               <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Classe</th>
               <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Professeur</th>
-              <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Annuler</th>
               <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Duree</th>
               <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Actions</th>
           </tr>

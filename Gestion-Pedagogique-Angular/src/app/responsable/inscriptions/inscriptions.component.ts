@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { csvToJson } from '../shared/utils';
-import { Etudiant } from '../interfaces/etudiant';
-import { InscriptionService } from '../services/inscription.service';
-import { AllService } from '../services/all.service';
-import { Classe } from '../interfaces/classe';
-import { Annee } from '../interfaces/annee';
-import { CommunicationService } from '../services/communication.service';
+import { Etudiant } from 'src/app/interfaces/etudiant';
+import { AllService } from 'src/app/services/all.service';
+import { Classe } from 'src/app/interfaces/classe';
+import { Annee } from 'src/app/interfaces/annee';
+import { CommunicationService } from 'src/app/services/communication.service';
 
 @Component({
   selector: 'app-inscriptions',
@@ -27,6 +25,6 @@ export class InscriptionsComponent implements OnInit {
       console.log(etudiant);
     });
   }
-  constructor(private inscriptionService: InscriptionService, private allService: AllService, private shared: CommunicationService) {}
+  constructor(private allService: AllService, private shared: CommunicationService) {}
 
 }
