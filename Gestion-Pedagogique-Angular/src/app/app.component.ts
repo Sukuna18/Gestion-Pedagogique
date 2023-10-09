@@ -54,4 +54,13 @@ export class AppComponent implements OnInit{
     }
     return false;
   }
+  isProfesseur(){
+    let roles = localStorage.getItem('role');
+    if(roles){
+      if(JSON.parse(roles).includes('professeur')){
+        return true;
+      }
+    }
+    return false;
+  }
 }

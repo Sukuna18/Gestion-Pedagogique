@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email, this.password).subscribe((response: any) => {
      if(response.token){
         this.role = this.authService.getUserRole();
-          let match = this.role.some((r: any) => ['responsable', 'attache', 'admin'].includes(r));
+          let match = this.role.some((r: any) => ['responsable', 'attache', 'professeur'].includes(r));
           if(match){
             this.route.navigate(['/home']);
           }

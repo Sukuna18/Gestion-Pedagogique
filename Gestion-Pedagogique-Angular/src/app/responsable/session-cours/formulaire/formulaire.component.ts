@@ -9,7 +9,6 @@ import { Professeur } from 'src/app/interfaces/professeur';
 import { Salle } from 'src/app/interfaces/salle';
 import { Semestre } from 'src/app/interfaces/semestre';
 import { Session } from 'src/app/interfaces/session';
-import { CommunicationService } from 'src/app/services/communication.service';
 import { SessionService } from 'src/app/services/session.service';
 import Swal from 'sweetalert2';
 
@@ -89,7 +88,6 @@ export class FormulaireComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private sessionService: SessionService,
-    private shared: CommunicationService,
     private route : ActivatedRoute
   ) {}
   filterCours() {
@@ -98,23 +96,14 @@ export class FormulaireComponent implements OnInit {
     if (this.searchText.trim() === '') {
       this.filteredCours = [];
     } else {
+      console.log(this.data.cours);
+      
       this.filteredCours = this.data.cours.filter(
         (cours) =>
-          cours.module.libelle
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase()) ||
-          cours.classe.libelle
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase()) ||
-          cours.semestre.libelle
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase()) ||
-          cours.professeur.nom
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase()) ||
-          cours.professeur.prenom
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase())
+          cours.module.libelle.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          cours.classe.libelle.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          cours.semestre.libelle.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          cours.professeur.name.toLowerCase().trim().includes(this.searchText.toLowerCase())
       );
     }
   }

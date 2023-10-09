@@ -16,7 +16,8 @@ export class SessionItemsComponent {
   isValidate: boolean = false;
 @Input() data: Partial<Session> ={} 
 @Output() deletedId: EventEmitter<number> = new EventEmitter();
-tempsRestant: number|undefined
+tempsRestant: number|undefined;
+@Input() heureDeroule:number|undefined
 constructor(private router: Router, private sessionService: SessionService) { }
 
 validerSession(){

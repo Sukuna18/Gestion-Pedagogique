@@ -37,7 +37,14 @@ const routes: Routes = [
   {
     path: 'attache', loadChildren: () => import('./attache/attache.module').then(m => m.AttacheModule),
     canActivate: [AuthGuardService],
-    data: { roles :['attache']}
+    data: { roles :['attache']},
+    resolve: { data: coursResolver },
+  },
+  {
+    path: 'professeur', loadChildren: () => import('./professeur/professeur.module').then(m => m.ProfesseurModule),
+    canActivate: [AuthGuardService],
+    data: { roles :['professeur']},
+    resolve: { data: coursResolver },
   },
   {
     path: 'home', component: PublicComponent, 

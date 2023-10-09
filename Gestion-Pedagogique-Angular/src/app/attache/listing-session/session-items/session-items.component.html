@@ -1,12 +1,12 @@
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.heure_debut}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.heure_fin}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.date}}</td>
-<td class="py-4 px-6 border-b border-gray-200 text-black">{{data.en_ligne == true ? 'En Ligne' : 'Presentiel'}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{heureDeroule}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.module?.libelle}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.classe?.libelle}}</td>
-<td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.professeur?.prenom}} {{data.cours?.professeur?.nom}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.professeur?.name}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.nb_heures}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{tempsRestant}}</td>
 <td class="py-4 px-6 border-b border-gray-200">
-  <button (click)="isValidate ? invaliderSession() : validerSession()" [class]="'cursor-pointer text-white' + (isValidate ? 'bg-red-600' : 'bg-pink-600' )">{{isValidate ? "Invalider" : "Valider"}}</button>
+  <button (click)="isValidate ? invaliderSession() : validerSession()" [class]="'cursor-pointer text-white p-2 rounded ' + (isValidate ? 'bg-red-500': 'bg-pink-500') ">{{isValidate ? "Invalider" : "Valider"}}</button>
 </td>

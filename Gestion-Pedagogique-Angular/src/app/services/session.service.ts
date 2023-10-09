@@ -52,4 +52,29 @@ export class SessionService extends RequestSharedService<RestResponse<Partial<Se
       catchError(this.handleError)
     );
   }
+  filtrerParModule(id:number|undefined){
+    return this.http.get(`http://127.0.0.1:8000/api/sessions/modules/${id}`).pipe(
+      tap((res: any) => {
+        console.log(res.data);
+      }),
+      catchError(this.handleError)
+    );
+  }
+  getStudentsBySession(id:number|undefined){
+    return this.http.get(`http://127.0.0.1:8000/api/sessions/eleves/${id}`).pipe(
+      tap((res: any) => {
+        console.log(res.data);
+      }),
+      catchError(this.handleError)
+    );
+  }
+  getSessionsByProfesseur(id:number|undefined){}
+  getSessionsByClass(id:number|undefined){
+    return this.http.get(`http://127.0.0.1:8000/api/sessions/classes/${id}`).pipe(
+      tap((res: any) => {
+        console.log(res.data);
+      }),
+      catchError(this.handleError)
+    );
+  }
 }

@@ -51,16 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Etudiant::class);
     }
-    public function hasRole($role)
+    public function professeur()
     {
-        return $this->roles->contains(function ($role) {
-            return $role->libelle === $role;
-        });
+        return $this->hasOne(Professeur::class);
     }
-    public function isResponsable()
-    {
-        return $this->roles->contains(function ($role) {
-            return $role->libelle === 'responsable';
-        });
-    }
+    
 }

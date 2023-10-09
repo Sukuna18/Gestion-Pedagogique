@@ -4,10 +4,32 @@
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.en_ligne == true ? 'En Ligne' : 'Presentiel'}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.module?.libelle}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.classe?.libelle}}</td>
-<td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.professeur?.prenom}} {{data.cours?.professeur?.nom}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.professeur?.name}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.nb_heures}}</td>
 <td class="py-4 px-6 border-b border-gray-200">
-  <span class="cursor-pointer">👁️ </span>
+  <button class="cursor-pointer" (click)="openModal('my_modal_' + data.id)" (click)="getStudentsBySession()">👁️ </button>
   <span class="cursor-pointer" (click)="deleteItem(data.id)">&nbsp;❌</span>
   <span class="cursor-pointer" (click)="updateItem()">&nbsp;✏️</span>
 </td>
+<!-- Contenu du modal -->
+<dialog [id]="'my_modal_' + data.id" class="modal">
+    <div class="modal-box bg-white">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h1 *ngIf="students.length == 0" class="text-black">Pas d'etudiants inscrit pour cette classes</h1>
+      <ng-container *ngFor="let item of students">
+        <h1 class="text-black">Etudiant no {{item.id}}</h1>
+        <div
+        class="p-4 border rounded-lg shadow-md bg-pink-600 text-white"                            
+        >
+          <strong>Nom Complet:</strong> {{item.name}}<br />
+          <strong>Matricule:</strong> {{item.matricule}}<br />
+          <strong>Classes:</strong> {{item.classe.libelle}}<br />
+          <strong>Annee Scolaire:</strong> {{item.annee_scolaire.libelle}}<br />
+    
+        </div>
+      </ng-container>
+    </div>
+</dialog>
+

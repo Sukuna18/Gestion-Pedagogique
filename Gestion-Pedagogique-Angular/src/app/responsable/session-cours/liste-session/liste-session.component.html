@@ -93,11 +93,15 @@
 >
   Liste Sessions
 </h1>
-<select (change)="filtrerByEtat($event)" class="select select-primary w-full max-w-xs absolute top-20 right-[40%] bg-white border-pink-600">
+<select (change)="filtrerByEtat($event)" class="select select-primary w-full max-w-xs absolute top-20 right-[25%] bg-white border-pink-600">
   <option disabled selected>Filtrer par etat</option>
   <option [value]="1">Terminé</option>
   <option [value]="0">En cours</option>
   <option [value]="2">Annulé</option>
+</select>
+<select (change)="filterByClasse($event)" class="select select-primary w-full max-w-xs absolute top-20 right-[50%] bg-white border-pink-600">
+  <option disabled selected>Filtrer par Classes</option>
+  <option *ngFor="let item of classes"  [value]="item.id">{{item.libelle}}</option>
 </select>
 </div>
   <table class="w-full table-fixed mt-5">
@@ -117,10 +121,10 @@
       <tbody class="bg-white">
           <tr app-items *ngFor="let item of data" [data]="item" (deletedId)="deleteSession($event)">
 
-            
           </tr>
       </tbody>
   </table>
+  
 </div>
 <!-- <app-pagination
 [currentPage]="currentPage"

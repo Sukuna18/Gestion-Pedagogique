@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCoursRequest;
 use App\Http\Requests\UpdateCoursRequest;
 use App\Http\Resources\CoursRessource;
+use App\Http\Resources\ProfesseurRessource;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Cours;
@@ -137,7 +138,7 @@ class CoursController extends Controller
         $salle = Salle::all();
         return response()->json([
             'classes' => $allClasses,
-            'professeurs' => $AllProfesseurs,
+            'professeurs' => ProfesseurRessource::collection($AllProfesseurs),
             'salles' => $salle,
             'modules' => $AllModules,
             'semestres' => $AllSemestres,

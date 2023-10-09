@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSessionCoursRequest;
 use App\Http\Requests\UpdateSessionCoursRequest;
+use App\Http\Resources\InscriptionRessource;
 use App\Http\Resources\SessionCoursRessource;
 use App\Models\Cours;
+use App\Models\Inscriptions;
 use App\Models\SessionCours;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -146,5 +148,24 @@ class SessionCoursController extends Controller
         ]);
         
         return new SessionCoursRessource($session);
+    }
+    public function getSessionCoursByModule($id){
+        $sessions = SessionCours::with('cours.module')->get();
+        $modules = $sessions->where('cours.module.id', $id);
+        return SessionCoursRessource::collection($modules);
+    }
+    public function getSessionCoursByProfesseur($id){
+        $sessions = SessionCours::with('cours.professeur')->get();
+        $professeurs = $sessions->where('cours.professeur.id', $id);
+        return SessionCoursRessource::collection($professeurs);
+    }
+    public function getSessionCoursByClasses($id){
+        $sessions = SessionCours::with('cours.classe')->get();
+        $classes = $sessions->where('cours.classe.id', $id);
+        return SessionCoursRessource::collection($classes);
+    }
+    public function getStudentsBySessionClasses($id){
+        $inscription = Inscriptions::where('classe_id', $id)->get();
+        return InscriptionRessource::collection($inscription);
     }
 }

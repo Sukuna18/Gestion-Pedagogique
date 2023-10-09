@@ -15,29 +15,25 @@ class ProfesseurSeeder extends Seeder
         $professeurs = [
             [
                 'id' => 1,
-                'nom' => 'Fall',
-                'prenom' => 'Bamba',
+                'user_id' => 6,
                 'specialite_id' => '1',
                 'grade' => 'Docteur',
             ],
             [
                 'id' => 2,
-                'nom' => 'Diop',
-                'prenom' => 'Moussa',
+                'user_id' => 7,
                 'specialite_id' => '2',
                 'grade' => 'Docteur',
             ],
             [
                 'id' => 3,
-                'nom' => 'Leblanc',
-                'prenom' => 'Francois',
+                'user_id' => 8,
                 'specialite_id' => '3',
                 'grade' => 'Docteur',
             ],
             [
                 'id' => 4,
-                'nom' => 'Mendy',
-                'prenom' => 'Federick',
+                'user_id' => 9,
                 'specialite_id' => '4',
                 'grade' => 'Docteur',
             ]

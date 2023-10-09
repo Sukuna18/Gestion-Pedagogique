@@ -16,4 +16,8 @@ class Professeur extends Model
     {
         return $this->belongsTo(Specialite::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

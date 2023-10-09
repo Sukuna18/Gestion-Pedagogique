@@ -153,8 +153,7 @@
                                 item.classe.effectif
                               }})<br />
                               <strong>Semestre:</strong> {{ item.semestre.libelle }}<br />
-                              <strong>Professeur:</strong> {{ item.professeur.prenom }}
-                              {{ item.professeur.nom }}<br />
+                              <strong>Professeur:</strong> {{ item.professeur.name }}<br />
                               <button
                         (click)="selectCours(item.id)"
                         class="bg-white rounded text-pink-600 p-1"
@@ -207,8 +206,7 @@
                           <strong>Semestre:</strong> {{ item.semestre.libelle
                           }}<br />
                           <strong>Professeur:</strong>
-                          {{ item.professeur.prenom }} {{ item.professeur.nom
-                          }}<br />
+                          {{ item.professeur.name }}<br />
                           <strong>Heure Globale:</strong>
                           {{ item.heure_globale }} <br />
                         </div>
@@ -247,8 +245,7 @@
               cours.classe.effectif
             }})<br />
             <strong>Semestre:</strong> {{ cours.semestre.libelle }}<br />
-            <strong>Professeur:</strong> {{ cours.professeur.nom }}
-            {{ cours.professeur.prenom }}<br />
+            <strong>Professeur:</strong> {{ cours.professeur.name }}<br />
   
             <button
               (click)="selectCours(cours.id)"
