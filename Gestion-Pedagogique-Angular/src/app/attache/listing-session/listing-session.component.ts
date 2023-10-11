@@ -14,6 +14,7 @@ export class ListingSessionComponent {
   data: Session[] = [];
   heureDeroule:number|undefined
   today = new Date();
+  currentDay:string = '';
   constructor(private sessionService: SessionService, private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.sessionService.getAll().subscribe((data: any) => {  
@@ -29,6 +30,7 @@ export class ListingSessionComponent {
 
   }
 filterByDate(e: any){
+  this.currentDay = e.target.value;
     this.sessionService.searchByDate((e.target.value)).subscribe((data: any) => {      
       this.data = data.data;
       this.heureDeroule = this.data.reduce((acc, session) => {
@@ -38,11 +40,11 @@ filterByDate(e: any){
 }
 filtrerByEtat(e:Event){
   const value = +(e.target as HTMLSelectElement).value;
-  this.sessionService.getAll().subscribe((response: {data:Session[]}) => {
+  this.sessionService.searchByDate(this.currentDay).subscribe((response:any) => {
     if(value === 1){
-      this.data = response.data.filter((session) => session.terminer)
+      this.data = response.data.filter((session:Session) => session.terminer)
     }else if(value === 0){
-      this.data = response.data.filter((session) => !session.terminer)
+      this.data = response.data.filter((session:Session) => !session.terminer)
     }
   });
 }

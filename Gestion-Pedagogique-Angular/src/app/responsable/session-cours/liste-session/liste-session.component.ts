@@ -15,6 +15,7 @@ export class ListeSessionComponent implements OnInit{
   currentPage: number = 1;
   itemsPerPage: number = 2;
   classes: Classe[] = [];
+  currentDay:string = '';
   constructor(private sessionService: SessionService, private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.sessionService.getAll().subscribe((data: any) => {  
@@ -26,6 +27,7 @@ export class ListeSessionComponent implements OnInit{
     });
   }
 filterByDate(e: any){
+  this.currentDay = e.target.value;
     this.sessionService.searchByDate((e.target.value)).subscribe((data: any) => {      
       this.data = data.data;
     });
@@ -37,11 +39,12 @@ deleteSession(id: number) {
 }
 filtrerByEtat(e:Event){
   const value = +(e.target as HTMLSelectElement).value;
-  this.sessionService.getAll().subscribe((response: {data:Session[]}) => {
+  this.sessionService.searchByDate(this.currentDay).subscribe((response: any) => {
+    console.log(response);
     if(value === 1){
-      this.data = response.data.filter((session) => session.terminer)
+      this.data = response.data.filter((session:Session) => session.terminer)
     }else if(value === 0){
-      this.data = response.data.filter((session) => !session.terminer)
+      this.data = response.data.filter((session:Session) => session.terminer == false)
     }
     else{
       this.sessionService.getAnnulatedSessions().subscribe((session)=>{

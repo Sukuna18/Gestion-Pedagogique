@@ -18,6 +18,7 @@ class InscriptionRessource extends JsonResource
             'id' => $this->id,
             'id_etudiant' => $this->user->id,
             'name' => $this->user->name,
+            'email' => $this->user->email,
             'matricule' => $this->user->matricule,
             'annee_scolaire' => $this->annee_scolaire,
             'classe' => $this->classe,

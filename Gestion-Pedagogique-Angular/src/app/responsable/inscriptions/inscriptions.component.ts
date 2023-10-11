@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Etudiant } from 'src/app/interfaces/etudiant';
+import { User } from 'src/app/interfaces/user';
 import { AllService } from 'src/app/services/all.service';
 import { Classe } from 'src/app/interfaces/classe';
 import { Annee } from 'src/app/interfaces/annee';
@@ -21,7 +21,7 @@ export class InscriptionsComponent implements OnInit {
       console.log(this.classes);
     }
     );
-    this.shared.inscriptionData.subscribe((etudiant: Etudiant[]) => {
+    this.shared.inscriptionData.subscribe((etudiant: User[]) => {
       console.log(etudiant);
     });
   }

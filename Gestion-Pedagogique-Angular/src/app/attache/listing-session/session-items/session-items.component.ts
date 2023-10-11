@@ -30,5 +30,8 @@ invaliderSession(){
     this.isValidate = false
   });
 }
+getPresence(){
+  this.router.navigate(['/attache/presence', this.data.id]);
+}
 
 }

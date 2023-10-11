@@ -1,8 +1,8 @@
 <div class="join flex justify-center mt-5">
-    <button class="join-item btn text-white border-none hover:bg-white hover:text-pink-600" [disabled]="currentPage === 1" (click)="changePage(-1)">Préc</button>
+    <button class="join-item btn border-none bg-gray-600 hover:bg-white hover:text-black" [disabled]="currentPage === 1" (click)="changePage(-1)">Préc</button>
     <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
       <button class="join-item btn bg-pink-600 text-white border-none hover:bg-white hover:text-pink-600" [class.btn-active]="currentPage === (i + 1)" (click)="pageChange.emit(i + 1)">{{i + 1}}</button>
     </ng-container>
-    <button class="join-item btn bg-pink-600 text-white hover:bg-white hover:text-pink-600 border-none" [disabled]="currentPage === totalPages" (click)="changePage(1)">Suiv</button>
-  </div>
+    <button class="bg-gray-600 join-item btn hover:bg-white hover:text-black border-none" [disabled]="currentPage === totalPages" (click)="changePage(1)">Suiv</button>
+</div>
   

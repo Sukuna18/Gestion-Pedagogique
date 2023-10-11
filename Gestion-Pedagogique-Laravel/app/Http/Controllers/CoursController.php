@@ -128,6 +128,11 @@ class CoursController extends Controller
             ], 422);
         }
     }
+    public function getCoursByProfesseur($id){
+        $professeur = Professeur::where('user_id', $id)->first();
+        $cours = Cours::where('professeur_id', $professeur->id)->get();
+        return CoursRessource::collection($cours);
+    }
     public function allData()
     {
         $allClasses = Classe::all();

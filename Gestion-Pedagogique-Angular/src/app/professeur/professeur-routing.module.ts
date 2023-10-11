@@ -4,8 +4,8 @@ import { VisuelSessionComponent } from './visuel-session/visuel-session.componen
 import { VisuelCoursComponent } from './visuel-cours/visuel-cours.component';
 
 const routes: Routes = [
-  {path: 'cours', component: VisuelSessionComponent},
-  {path: 'sessions', component: VisuelCoursComponent}
+  {path: 'cours', component: VisuelCoursComponent },
+  {path: 'sessions', component: VisuelSessionComponent}
 ];
 
 @NgModule({

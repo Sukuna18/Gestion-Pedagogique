@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  ngOnInit(): void {}
+  userInfo: any = {};
+  ngOnInit(): void {
+    this.userService.getConnectedUser().subscribe((res:any) => {     
+      this.userInfo = res.data;
+    });
+  }
   title = 'Gestion-Pedagogique-Angular';
-  constructor(private authService: AuthService,  private router: Router) {  }
+  constructor(private authService: AuthService,  private router: Router, private userService:UserService) {  }
   logout(){
     Swal.fire({
       title: 'Déconnexion',

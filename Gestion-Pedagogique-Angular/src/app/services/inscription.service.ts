@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { RequestSharedService } from './request-shared.service';
 import { RestResponse } from '../interfaces/rest-response';
-import { Etudiant } from '../interfaces/etudiant';
+import { User } from '../interfaces/user';
 import { catchError, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InscriptionService extends RequestSharedService<RestResponse<Partial<Etudiant>>> {
+export class InscriptionService extends RequestSharedService<RestResponse<Partial<User>>> {
 override uri(): string {
     return 'inscriptions';
 }
-addInscriptions(etudiants: Etudiant[], classe_id: number, annee_scolaire_id: number) {
+addInscriptions(etudiants: User[], classe_id: number, annee_scolaire_id: number) {
   const httpOptions = {
     headers: { 'Content-Type': 'application/json' },
   };

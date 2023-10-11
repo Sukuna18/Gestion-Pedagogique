@@ -60,6 +60,14 @@ export class SessionService extends RequestSharedService<RestResponse<Partial<Se
       catchError(this.handleError)
     );
   }
+  filtrerParProfModule(id:number|undefined, user:number){
+    return this.http.get(`http://127.0.0.1:8000/api/sessions/professeur/${user}/modules/${id}`).pipe(
+      tap((res: any) => {
+        console.log(res.data);
+      }),
+      catchError(this.handleError)
+    );
+  }
   getStudentsBySession(id:number|undefined){
     return this.http.get(`http://127.0.0.1:8000/api/sessions/eleves/${id}`).pipe(
       tap((res: any) => {
@@ -68,9 +76,38 @@ export class SessionService extends RequestSharedService<RestResponse<Partial<Se
       catchError(this.handleError)
     );
   }
-  getSessionsByProfesseur(id:number|undefined){}
+  getSessionsByProfesseur(id:number|undefined, date?:string){
+    return this.http.get(`http://127.0.0.1:8000/api/sessions/professeur/${id}?date=${date}`).pipe(
+      tap((res: any) => {
+        console.log(res.data);
+      }),
+      catchError(this.handleError)
+    )
+  }
   getSessionsByClass(id:number|undefined){
     return this.http.get(`http://127.0.0.1:8000/api/sessions/classes/${id}`).pipe(
+      tap((res: any) => {
+        console.log(res.data);
+      }),
+      catchError(this.handleError)
+    );
+  }
+  updatePresence(id:number){
+    return this.http.get(`http://127.0.0.1:8000/api/presences/${id}`).pipe(
+      tap((res: any) => {
+        console.log(res);
+        Swal.fire({
+          title: "Succès",
+          icon: "success",
+          text: "changer avec succès"
+
+        })
+      }),
+      catchError(this.handleError)
+    );
+  }
+  getUserBySession(id:number|undefined){
+    return this.http.get(`http://127.0.0.1:8000/api/session/${id}/users`).pipe(
       tap((res: any) => {
         console.log(res.data);
       }),

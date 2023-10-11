@@ -8,6 +8,7 @@ import { ListeVisuelCoursComponent } from './visuel-cours/liste-visuel-cours/lis
 import { ListeVisuelSessionComponent } from './visuel-session/liste-visuel-session/liste-visuel-session.component';
 import { ItemsVisuelSessionComponent } from './visuel-session/liste-visuel-session/items-visuel-session/items-visuel-session.component';
 import { ItemsVisuelCoursComponent } from './visuel-cours/liste-visuel-cours/items-visuel-cours/items-visuel-cours.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,11 +18,12 @@ import { ItemsVisuelCoursComponent } from './visuel-cours/liste-visuel-cours/ite
     ListeVisuelCoursComponent,
     ListeVisuelSessionComponent,
     ItemsVisuelSessionComponent,
-    ItemsVisuelCoursComponent
+    ItemsVisuelCoursComponent,
   ],
   imports: [
     CommonModule,
-    ProfesseurRoutingModule
-  ]
+    FormsModule,
+    ProfesseurRoutingModule,
+  ],
 })
 export class ProfesseurModule { }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Annee } from 'src/app/interfaces/annee';
 import { Classe } from 'src/app/interfaces/classe';
-import { Etudiant } from 'src/app/interfaces/etudiant';
+import { User } from 'src/app/interfaces/user';
 import { CommunicationService } from 'src/app/services/communication.service';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { csvToJson } from 'src/app/shared/utils';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./formulaire.component.css']
 })
 export class FormulaireComponent implements OnInit {
-  etudiants: Etudiant[] = [];
+  etudiants: User[] = [];
   @Input() classes: Classe[] = [];
   classe_id: number = 1;
   isFileSelected: boolean = false;
@@ -29,7 +29,7 @@ export class FormulaireComponent implements OnInit {
     reader.onload = () => {
      let json =  csvToJson(reader.result as string);
      console.log(json);
-     this.etudiants = json as Etudiant[];
+     this.etudiants = json as User[];
     };
     this.isFileSelected = true;
   }

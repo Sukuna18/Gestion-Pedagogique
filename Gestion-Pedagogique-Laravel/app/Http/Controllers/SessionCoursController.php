@@ -8,9 +8,13 @@ use App\Http\Resources\InscriptionRessource;
 use App\Http\Resources\SessionCoursRessource;
 use App\Models\Cours;
 use App\Models\Inscriptions;
+use App\Models\Professeur;
 use App\Models\SessionCours;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Symfony\Component\ErrorHandler\Debug;
+
+use function Psy\debug;
 
 class SessionCoursController extends Controller
 {
@@ -40,14 +44,19 @@ class SessionCoursController extends Controller
     public function store(StoreSessionCoursRequest $request)
     {
         try {
-        $sessions = SessionCours::where('salle_id', $request->salle_id)
-            ->where('date', Carbon::parse($request->date)->format('Y-m-d'))
-            ->where('heure_debut', $request->heure_debut)
-            ->where('heure_fin', $request->heure_fin)
+            $sessions = SessionCours::whereHas('cours', function ($query) use ($request) {
+                $query->where('cours_id', $request->cours_id);
+            })->where('heure_debut', '<', $request->heure_fin)
+            ->where('heure_fin', '>', $request->heure_debut)
+            ->where('date', $request->date)
+            ->where('deleted_at', null)
+            ->where('annuler', false)
             ->first();
         if ($sessions) {
             return response()->json(['message' => 'Une session de cours est déjà programmée dans cette salle à cette date et heure'], 422);
         }
+
+            
         if (SessionCours::isOverTime($request->cours_id, $request->heure_debut, $request->heure_fin) == true) {
             return response()->json(['message' => "l'horaire choisie dépasse l'horaire globale du cours"], 422);
         }
@@ -62,7 +71,7 @@ class SessionCoursController extends Controller
             ]);
             return new SessionCoursRessource($data);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Une erreur est survenue lors de la création de la session de cours'], 422);
+            throw $th;
         }
     }
 
@@ -121,10 +130,6 @@ class SessionCoursController extends Controller
     {
         try {
             $session->delete();
-            $cours = Cours::find($session->cours_id);
-            $cours->update([
-                'termine' => false,
-            ]);
 
             return response()->json(['message' => 'Session de cours supprimée avec succès'], 200);
         } catch (\Throwable $th) {
@@ -154,10 +159,22 @@ class SessionCoursController extends Controller
         $modules = $sessions->where('cours.module.id', $id);
         return SessionCoursRessource::collection($modules);
     }
-    public function getSessionCoursByProfesseur($id){
-        $sessions = SessionCours::with('cours.professeur')->get();
-        $professeurs = $sessions->where('cours.professeur.id', $id);
-        return SessionCoursRessource::collection($professeurs);
+    public function getSessionProfesseurModule($id, $module) {
+        $professeur = Professeur::where('user_id', $id)->first();
+        $sessionsModule = SessionCours::whereHas('cours', function ($query) use ($module, $professeur) {
+                $query->where('module_id', $module)
+                    ->where('professeur_id', $professeur->id);
+            })
+            ->get();
+        return SessionCoursRessource::collection($sessionsModule);
+    }
+    
+    public function getSessionCoursByProfesseur($id, Request $request,){
+        $date = $request->date ?? Carbon::now()->format('Y-m-d');
+        $professeurs = Professeur::where('user_id', $id)->first();
+        $session = SessionCours::with('cours.professeur')->where('date', $date)->get();
+        $sessions = $session->where('cours.professeur.id', $professeurs->id);
+        return SessionCoursRessource::collection($sessions);
     }
     public function getSessionCoursByClasses($id){
         $sessions = SessionCours::with('cours.classe')->get();

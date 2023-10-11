@@ -1,0 +1,8 @@
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ data.name }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200 truncate">{{ data.email }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ data.matricule }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ session.cours.classe.libelle }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ session.cours.module.libelle }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">
+  <button (click)="handlePresence()"[disabled]="data.present" [class]="'rounded p-2 text-white ' +(data.present ? 'bg-green-500': 'bg-pink-500')">{{ !data.present ? 'Valider': 'Validée✅' }}</button>
+</td>

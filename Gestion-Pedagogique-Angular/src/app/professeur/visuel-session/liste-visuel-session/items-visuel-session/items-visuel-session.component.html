@@ -1,1 +1,15 @@
-<p>items-visuel-session works!</p>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.heure_fin}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.heure_debut}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.date}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.en_ligne == true ? 'En Ligne' : 'Presentiel'}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.cours?.module?.libelle}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.cours?.classe?.libelle}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.cours?.professeur?.name}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">{{session?.nb_heures}}</td>
+<td class="py-4 px-6 border-b border-gray-200 text-black">
+    <ng-container *ngIf="isNotificiationSent == true">
+        <span class="loading loading-spinner loading-md text-pink-600 ml-5"></span>
+    </ng-container>
+    
+    <button [disabled]="done" *ngIf="isNotificiationSent == false" [class]="'text-white p-2 rounded ' +(done ? 'bg-green-500' : 'bg-pink-500')" (click)="annulerCours()">{{ !done ? 'Annuler' : 'Demande Envoyee✅' }}</button>
+</td>

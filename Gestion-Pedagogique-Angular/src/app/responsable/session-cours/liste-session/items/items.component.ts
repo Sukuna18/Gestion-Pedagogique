@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Etudiant } from 'src/app/interfaces/etudiant';
+import { User } from 'src/app/interfaces/user';
 import { Session } from 'src/app/interfaces/session';
 import { SessionService } from 'src/app/services/session.service';
 import Swal from 'sweetalert2';
@@ -14,7 +14,7 @@ export class ItemsComponent implements OnInit {
   ngOnInit(): void {}
 @Input() data: Partial<Session> ={} 
 @Output() deletedId: EventEmitter<number> = new EventEmitter();
-students: Etudiant[] = [];
+students: User[] = [];
 constructor(private router: Router, private sessionService:SessionService) { }
 deleteItem(id: number | undefined) {
   Swal.fire({

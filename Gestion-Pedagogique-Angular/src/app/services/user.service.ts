@@ -9,7 +9,7 @@ export class UserService {
 
   constructor(private htpp:HttpClient) { }
   getConnectedUser(){
-    return this.htpp.get('http://127.0.0.1:8000/api/users').pipe(
+    return this.htpp.get('http://127.0.0.1:8000/api/user').pipe(
       tap((response:any)=>{
         console.log(response);
       }),

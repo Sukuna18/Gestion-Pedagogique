@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Etudiant } from '../interfaces/etudiant';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommunicationService {
-  public inscriptionData = new Subject<Etudiant[]>();
+  public inscriptionData = new Subject<User[]>();
   
-  SendInscriptionData(data: Etudiant[]){
+  SendInscriptionData(data: User[]){
     this.inscriptionData.next(data);
   }
   
