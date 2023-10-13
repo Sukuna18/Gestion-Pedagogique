@@ -30,6 +30,11 @@ class Inscriptions extends Model
         static::created(function ($inscription) {
             $inscription->user->roles()->attach(3);
         });
+        static::deleted(function ($inscription) {
+            $inscription->user->roles()->detach(3);
+            User::destroy($inscription->user_id);
+            Etudiant::where('user_id', $inscription->user_id)->delete();
+        });
     }
 }
 

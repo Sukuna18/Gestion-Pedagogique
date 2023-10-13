@@ -5,13 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { FormulaireComponent } from './formulaire/formulaire.component';
 import { InscriptionsComponent } from './inscriptions.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ListeInscriptionsComponent } from './liste-inscriptions/liste-inscriptions.component';
+import { ItemsInscriptionsComponent } from './liste-inscriptions/items-inscriptions/items-inscriptions.component';
 
 
 
 @NgModule({
   declarations: [
     InscriptionsComponent,
-    FormulaireComponent
+    FormulaireComponent,
+    ListeInscriptionsComponent,
+    ItemsInscriptionsComponent
   ],
   imports: [
     CommonModule,

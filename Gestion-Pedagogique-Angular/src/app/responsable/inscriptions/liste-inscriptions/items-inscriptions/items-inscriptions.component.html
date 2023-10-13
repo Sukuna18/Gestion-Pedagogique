@@ -1,0 +1,10 @@
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ user?.name }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200 truncate">{{ user?.matricule }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ user?.date_de_naissance }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ user?.lieu_de_naissance }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ user?.annee_scolaire?.libelle}}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">{{ user?.classe?.libelle }}</td>
+<td class="py-4 text-black px-6 border-b border-gray-200">
+  <span class="cursor-pointer" (click)="deleteItem()">❌ &nbsp;</span>
+</td>
+
