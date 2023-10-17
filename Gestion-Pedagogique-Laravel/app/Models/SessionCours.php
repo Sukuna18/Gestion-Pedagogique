@@ -18,8 +18,9 @@ class SessionCours extends Model
         'salle_id',
         'nb_heures',
         'en_ligne',
-        'annuler',
-        'terminer'
+        'en_cours',
+        'terminer',
+        'valider'
 
     ];
     
@@ -33,7 +34,7 @@ class SessionCours extends Model
     }
      public static function isOverTime(string $cours_id, string $heure_debut, string $heure_fin){
         $cours = Cours::find($cours_id);
-        $sessionsCours = SessionCours::where('cours_id', $cours_id)->where('annuler', false)->where('deleted_at', null)->get();
+        $sessionsCours = SessionCours::where('cours_id', $cours_id)->where('deleted_at', null)->get();
         $cummul = $sessionsCours->sum('nb_heures');
         $duree = Carbon::parse($heure_debut)->diffInHours(Carbon::parse($heure_fin));
         if($cummul + $duree > $cours->heure_globale){

@@ -7,7 +7,7 @@
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.nb_heures}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{tempsRestant}}</td>
 <td class="py-4 px-6 border-b border-gray-200">
-  <button (click)="isValidate ? invaliderSession() : validerSession()" [class]="'cursor-pointer text-white p-2 rounded ' + (isValidate ? 'bg-red-500': 'bg-pink-500') ">{{isValidate ? "Invalider" : "Valider"}}</button>
+  <button [disabled]="!data.terminer" (click)="isValidate ? invaliderSession() : validerSession()" [class]="' text-white p-2 rounded ' + (isValidate ? 'bg-red-500': 'bg-pink-500') ">{{isValidate ? "Invalider" : "Valider"}}</button>
 </td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">
   <button (click)="getPresence()" class="rounded bg-green-500 p-2 text-white">Lister</button>

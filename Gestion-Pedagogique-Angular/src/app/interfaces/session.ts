@@ -8,7 +8,7 @@ export interface Session extends RestResponse<Session>{
     heure_fin: string;
     en_ligne: boolean;
     nb_heures: number;
-    annuler: boolean;
+    en_cours: boolean;
     cours_id: number;
     cours: Cours;
     salle_id: number;

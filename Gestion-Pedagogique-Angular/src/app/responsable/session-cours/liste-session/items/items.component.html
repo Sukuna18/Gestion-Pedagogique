@@ -5,7 +5,12 @@
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.module?.libelle}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.classe?.libelle}}</td>
 <td class="py-4 px-6 border-b border-gray-200 text-black">{{data.cours?.professeur?.name}}</td>
-<td class="py-4 px-6 border-b border-gray-200 text-black">{{data.nb_heures}}</td>
+<td *ngIf="!data.terminer" [class]="'py-4 px-6 border-b border-gray-200 ' + (data.en_cours ? 'text-orange-500' : 'text-red-500')">
+  {{data.en_cours ? 'En cours' : 'en attente'}}
+</td>
+<td *ngIf="data.terminer" [class]="'py-4 px-6 border-b border-gray-200 ' + (data.terminer && 'text-green-500')">
+  {{data.terminer && 'terminer'}}
+</td>
 <td class="py-4 px-6 border-b border-gray-200">
   <button class="cursor-pointer" (click)="openModal('my_modal_' + data.id)" (click)="getStudentsBySession()">👁️ </button>
   <span class="cursor-pointer" (click)="deleteItem(data.id)">&nbsp;❌</span>

@@ -20,8 +20,9 @@ return new class extends Migration
             $table->time('heure_fin');
             $table->boolean('en_ligne')->default(false);
             $table->integer('nb_heures');
-            $table->boolean('annuler')->default(false);
+            $table->boolean('en_cours')->default(false);
             $table->boolean('terminer')->default(false);
+            $table->boolean('valider')->default(false);
             $table->foreignIdFor(Cours::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Salle::class)->nullable()->constrained()->cascadeOnDelete();
             $table->softDeletes();

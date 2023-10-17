@@ -23,8 +23,9 @@ class SessionCoursRessource extends JsonResource
             "salle" => $this->salle,
             "nb_heures" => $this->nb_heures,
             "terminer" => $this->terminer,
+            "valider" => $this->valider,
             "en_ligne" => $this->en_ligne,
-            "annuler" => $this->annuler,
+            "en_cours" => $this->en_cours,
         ];
     }
 }

@@ -60,13 +60,13 @@
           <h2 *ngIf="data.length == 0 && !isLoaded " class="text-center text-3xl text-pink-600 mt-10 ">Pas d'eleves dans ce session</h2>
           <h2 *ngIf="isLoaded" class="text-center text-3xl text-pink-600 mt-10 "><span class="bg-pink-600 loading loading-spinner loading-lg"></span></h2>
         </div>
-      </div>
-      <div class="join flex justify-center mt-[30%]">
-        <button class="join-item btn bg-gray-600 hover:bg-white hover:text-black" [disabled]="currentPage === 1" (click)="changePage(-1)">Préc</button>
-        <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
-          <button class="text-white bg-pink-600 border-none hover:bg-white hover:text-pink-600 join-item btn" [class.btn-active]="currentPage === (i + 1)" (click)="setCurrentPage(i + 1)">{{i + 1}}</button>
-        </ng-container>
-        <button class="join-item btn bg-gray-600 hover:bg-white hover:text-black" [disabled]="currentPage === totalPages" (click)="changePage(1)">Suiv</button>
+        <div class="join flex justify-center mt-[10%]">
+          <button class="join-item btn bg-gray-600 hover:bg-white hover:text-black" [disabled]="currentPage === 1" (click)="changePage(-1)">Préc</button>
+          <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+            <button class="text-white bg-pink-600 border-none hover:bg-white hover:text-pink-600 join-item btn" [class.btn-active]="currentPage === (i + 1)" (click)="setCurrentPage(i + 1)">{{i + 1}}</button>
+          </ng-container>
+          <button class="join-item btn bg-gray-600 hover:bg-white hover:text-black" [disabled]="currentPage === totalPages" (click)="changePage(1)">Suiv</button>
+        </div>
       </div>
     </section>
   </div>

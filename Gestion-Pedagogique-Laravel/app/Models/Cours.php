@@ -45,4 +45,7 @@ class Cours extends Model
     {
         return $this->hasMany(SessionCours::class);
     }
+    public static function booted(){
+
+    }
 }

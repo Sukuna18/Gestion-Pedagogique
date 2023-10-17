@@ -11,7 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void {    
+}
 @Input() data: Partial<Session> ={} 
 @Output() deletedId: EventEmitter<number> = new EventEmitter();
 students: User[] = [];

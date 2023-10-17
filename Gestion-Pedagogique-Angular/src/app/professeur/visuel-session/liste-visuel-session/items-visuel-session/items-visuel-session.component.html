@@ -11,5 +11,5 @@
         <span class="loading loading-spinner loading-md text-pink-600 ml-5"></span>
     </ng-container>
     
-    <button [disabled]="done" *ngIf="isNotificiationSent == false" [class]="'text-white p-2 rounded ' +(done ? 'bg-green-500' : 'bg-pink-500')" (click)="annulerCours()">{{ !done ? 'Annuler' : 'Demande Envoyee✅' }}</button>
+    <button [disabled]="done || session?.en_cours || session?.terminer" *ngIf="isNotificiationSent == false" [class]="'text-white p-2 rounded ' +(done ? 'bg-green-500' : 'bg-pink-500')" (click)="annulerCours()">{{ !done ? 'Annuler' : 'Envoyée✅' }}</button>
 </td>
